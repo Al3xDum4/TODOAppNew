@@ -35,5 +35,6 @@
     <orderEntry type="library" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.2.Final" level="project" />
     <orderEntry type="library" name="Maven: de.jensd:fontawesomefx:8.9" level="project" />
     <orderEntry type="library" name="Maven: org.controlsfx:controlsfx:8.40.11" level="project" />
+    <orderEntry type="library" name="io.github.typhon0:AnimateFX:1.2.1" level="project" />
   </component>
 </module>

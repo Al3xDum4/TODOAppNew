@@ -6,6 +6,8 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import javax.persistence.EntityManager;
 import java.util.List;
 
+//TODO: UserRepository: add implementation
+
 public class UserRepository implements CrudRepository<User, Integer> {
     private EntityManager entityManager;
 

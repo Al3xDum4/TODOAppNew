@@ -2,6 +2,8 @@ package com.Alex.model;
 
 import javax.persistence.*;
 
+//TODO: User class: One to **** relationship to task. See virtual store implementation
+
 @Entity
 @Table(name = "user")
 public class User {

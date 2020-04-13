@@ -2,6 +2,7 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -9,14 +10,14 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.Alex.controller.Controller">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" styleClass="search" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.Alex.controller.Controller">
    <bottom>
       <Label maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="800.0" BorderPane.alignment="CENTER" />
    </bottom>
@@ -58,7 +59,7 @@
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin></FontAwesomeIconView>
-                        <TextField prefHeight="31.0" prefWidth="188.0" promptText="search" style="-fx-background-color: transparent;" styleClass="search" HBox.hgrow="ALWAYS">
+                        <TextField fx:id="txtFieldSearchHomepage" prefHeight="31.0" prefWidth="188.0" promptText="search" style="-fx-background-color: transparent;" styleClass="search" stylesheets="style.css" HBox.hgrow="ALWAYS">
                            <HBox.margin>
                               <Insets left="5.0" right="10.0" />
                            </HBox.margin>
@@ -75,15 +76,12 @@
                               <Insets right="17.0" />
                            </HBox.margin>
                         </FontAwesomeIconView>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="profilePicture" fitHeight="25.0" fitWidth="25.0" opacity="0.53" pickOnBounds="true" preserveRatio="true">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
-                           <image>
-                              <Image url="@../../../../../Desktop/download.png" />
-                           </image>
                         </ImageView>
-                        <ComboBox prefHeight="31.0" prefWidth="142.0" promptText="  Contul meu" style="-fx-background-color: transparent;">
+                        <ComboBox onMouseClicked="#displayMyAccountScreen" prefHeight="31.0" prefWidth="142.0" promptText="   my account" style="-fx-background-color: transparent;">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -101,23 +99,16 @@
    <left>
       <VBox prefWidth="150.0" style="-fx-background-color: #ded6d3;" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER_LEFT">
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
+            <HBox alignment="CENTER">
                <children>
-                  <FontAwesomeIconView glyphName="GROUP" size="16.0" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Team">
+                  <Button fx:id="btn_team" mnemonicParsing="false" onAction="#displayTeamScreen" prefHeight="31.0" prefWidth="180.0" style="-fx-font-weight: bold; -fx-background-color: transparent;" text="Team" HBox.hgrow="ALWAYS">
                      <HBox.margin>
-                        <Insets left="10.0" />
+                        <Insets top="40.0" />
                      </HBox.margin>
-                  </Text>
+                  </Button>
                </children>
-               <VBox.margin>
-                  <Insets top="70.0" />
-               </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER_LEFT">
+            <HBox fx:id="hb_dashboard" alignment="CENTER_LEFT">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
@@ -156,6 +147,22 @@
                <children>
                   <FontAwesomeIconView glyphName="LIST" size="16.0" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="MyTasks">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <FontAwesomeIconView glyphName="CALENDAR" size="16.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Calendar">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
@@ -214,4 +221,11 @@
          </children>
       </VBox>
    </left>
+   <center>
+      <BorderPane BorderPane.alignment="CENTER">
+         <center>
+            <Pane prefHeight="596.0" prefWidth="938.0" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </center>
 </BorderPane>

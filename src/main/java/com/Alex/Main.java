@@ -21,15 +21,6 @@ public class Main extends Application {
         InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream("FXML/home_page.fxml");
         Parent root = fxmlLoader.load(resourceAsStream);
         primaryStage.setScene(new Scene(root, 1100, 700));
-
-        root.setOnMousePressed((MouseEvent event)-> {
-                x = event.getSceneX();
-                y = event.getSceneY();
-        });
-        root.setOnMouseDragged((MouseEvent event) ->{
-                primaryStage.setX(event.getScreenX() - x);
-                primaryStage.setY(event.getSceneY() - y);
-        });
         primaryStage.show();
     }
     public static void main(String[] args) {

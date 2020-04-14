@@ -5,21 +5,22 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
+import java.io.InputStream;
 import java.net.URL;
 
 public class FxmlLoader {
-    private BorderPane borderPane;
+    private Pane pane;
 
-    public BorderPane getPane(String fileName){
+    public Pane getPane(String fileName){
         try {
-            URL fileUrl = Main.class.getResource("/sample/"+fileName+".fxml");
+            InputStream fileUrl = Main.class.getResourceAsStream("/FXML/"+fileName+".fxml");
             if(fileUrl==null){
                 throw new java.io.FileNotFoundException("Fxml file can't be found");
             }
-            borderPane = new FXMLLoader().load(fileUrl);
+            pane = new FXMLLoader().load(fileUrl);
         }catch (Exception e){
-            System.out.println("No page "+fileName+" please check FxmlLoader.");
+            System.out.println("No page "+"'"+fileName+"'"+" please check FxmlLoader.");
         }
-        return borderPane;
+        return pane;
     }
 }

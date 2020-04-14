@@ -27,21 +27,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-//TODO: Add button to show password
-//TODO: Check if username already exists
-//TODO: Check if password contains certain characters
-//TODO: Save encoded password in DB
 //TODO: Add scene for different operations
 //TODO: Make all the tabs hidden. Login window opens when you click an option in the menu
 //TODO: After login success show other tabs. Clear text fields. Show message.
 //TODO: After clicking register, empty text boxes, show message user registration.
-//TODO: Create other entities. Task, Subtask + repository gor each.
+//DONE: Create other entities. Task, Subtask + repository gor each.
 //TODO: create tab for registering tasks
 //TODO: create control for registering subtask
 //TODO: create tab for assign task. Two comboboxes, one for tasks, one for all users.
-//TODO: add button to show password
+//DONE: add button to show password
 //TODO: check if username is already exists
-//TODO: check if username already exists
 //TODO: check if password contain certain characters
 //TODO: save encrypted(encoded) password in DB. Be careful how to read them unencrypted
 //TODO: implement login action
@@ -55,6 +50,7 @@ public class Controller implements Initializable {
     public TextField txtFieldUsernameRegisterScene;
     public TextField txtFieldEmailRegisterScene;
     public TextField txtFieldSearchHomepage;
+    public TextField txtFieldPassword;
 
     public PasswordField pwdFieldPasswordLoginScene;
     public PasswordField pwdFieldConfirmPasswordRegisterScene;
@@ -64,6 +60,12 @@ public class Controller implements Initializable {
     public Button btnRegisterLoginScene;
     public Button btnRegisterRegisterScene;
     public Button btn_team;
+    public Button btn_dashboard;
+    public Button btn_tasks;
+    public Button btn_calendar;
+    public Button btn_projects;
+    public Button btn_chat;
+    public Button btn_showPassword;
 
     public BorderPane borderPane;
     public BorderPane loginBorderPane;
@@ -141,5 +143,48 @@ public class Controller implements Initializable {
         FxmlLoader fxmlLoader = new FxmlLoader();
         Pane pane = fxmlLoader.getPane("team");
         borderPane.setCenter(pane);
+    }
+
+    public void displayDashboardScreen(ActionEvent actionEvent) {
+        FxmlLoader fxmlLoader = new FxmlLoader();
+        Pane pane = fxmlLoader.getPane("dashboard");
+        borderPane.setCenter(pane);
+    }
+
+    public void displayTasksScreen(ActionEvent actionEvent) {
+        FxmlLoader fxmlLoader = new FxmlLoader();
+        Pane pane = fxmlLoader.getPane("mytasks");
+        borderPane.setCenter(pane);
+    }
+
+    public void displayCalendarScreen(ActionEvent actionEvent) {
+        FxmlLoader fxmlLoader = new FxmlLoader();
+        Pane pane = fxmlLoader.getPane("calendar");
+        borderPane.setCenter(pane);
+    }
+
+    public void displayProjectsScreen(ActionEvent actionEvent) {
+        FxmlLoader fxmlLoader = new FxmlLoader();
+        Pane pane = fxmlLoader.getPane("myprojects");
+        borderPane.setCenter(pane);
+    }
+
+    public void displayChatScreen(ActionEvent actionEvent) {
+        FxmlLoader fxmlLoader = new FxmlLoader();
+        Pane pane = fxmlLoader.getPane("chat");
+        borderPane.setCenter(pane);
+    }
+
+    public void showPassword(ActionEvent actionEvent) {
+        if (!txtFieldPassword.isVisible()) {
+            txtFieldPassword.setText(pwdFieldPasswordLoginScene.getText());
+            txtFieldPassword.setEditable(false);
+            txtFieldPassword.setVisible(true);
+            pwdFieldPasswordLoginScene.setVisible(false);
+
+        } else {
+            txtFieldPassword.setVisible(false);
+            pwdFieldPasswordLoginScene.setVisible(true);
+        }
     }
 }

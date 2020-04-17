@@ -5,10 +5,11 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
 //TODO: UserRepository: add implementation
 
-public class UserRepository implements CrudRepository<User, Integer> {
+public class UserRepository implements CrudRepository<User, String> {
     private EntityManager entityManager;
 
     public UserRepository(EntityManager entityManager) {
@@ -28,9 +29,9 @@ public class UserRepository implements CrudRepository<User, Integer> {
     }
 
     @Override
-    public void deleteById(Integer id) {
-        User user = findById(id);
-        if (user != null) {
+    public void deleteById(String id) {
+        Optional<User> user = findById(id);
+        if (user.isPresent()) {
             entityManager.getTransaction().begin();
             entityManager.remove(user);
             entityManager.getTransaction().commit();
@@ -38,15 +39,15 @@ public class UserRepository implements CrudRepository<User, Integer> {
     }
 
     @Override
-    public User findById(Integer id) {
+    public Optional<User> findById(String id) {
         // DONE: add try catch
         try {
             User user = entityManager.find(User.class, id);
-            return user;
+            return Optional.of(user);
         } catch (Exception e) {
             System.out.println("Something went wrong...");
         }
-        return null;
+        return Optional.empty();
     }
 
     public User findByUsername(String username) {

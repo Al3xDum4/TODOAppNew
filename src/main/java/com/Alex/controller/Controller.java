@@ -3,19 +3,21 @@ package com.Alex.controller;
 import com.Alex.model.User;
 import com.Alex.repository.UserRepository;
 import com.sun.xml.bind.v2.TODO;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -27,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-//TODO: Add scene for different operations
+//DONE: Add scene for different operations
 //TODO: Make all the tabs hidden. Login window opens when you click an option in the menu
 //TODO: After login success show other tabs. Clear text fields. Show message.
 //TODO: After clicking register, empty text boxes, show message user registration.
@@ -45,6 +47,10 @@ public class Controller implements Initializable {
     @FXML
     public Label lblInformation;
     public Label lblInformationLoginScene;
+    public Label lblLoginUsernameMessage;
+    public Label lblLoginPasswordMessage;
+    public Label lblRegisterUsernameMessage;
+    public Label lblRegisterPasswordMessage;
 
     public TextField txtFieldUsernameLoginScene;
     public TextField txtFieldUsernameRegisterScene;
@@ -71,10 +77,16 @@ public class Controller implements Initializable {
     public BorderPane loginBorderPane;
     public BorderPane registerBorderPane;
 
+    public FontAwesomeIconView iconUsernameLogin;
+    public FontAwesomeIconView iconPasswordLogin;
+
     public ImageView profilePicture;
     public AnchorPane hb_team;
     public HBox hb_dashboard;
     public VBox vboxTaskItems;
+
+
+    public ComboBox<String> cmbMyAccount;
     private UserRepository userRepository;
     private boolean isConnectionSuccessful = false;
 
@@ -117,7 +129,26 @@ public class Controller implements Initializable {
 
     @FXML
     private void loginUser(ActionEvent actionEvent) {
+        if (txtFieldUsernameLoginScene.getText().length() < 1 || !userRepository.findById(txtFieldUsernameLoginScene.getText()).isPresent()) {
+            iconUsernameLogin.setFill(Color.RED);
+            lblLoginUsernameMessage.setVisible(true);
+        } else {
+            User user = userRepository.findById(txtFieldUsernameLoginScene.getText()).get();
+            if (user.getPassword().equals(pwdFieldPasswordLoginScene.getText())) {
+                //System.out.println(txtFieldUsername.getText());
+                //System.out.println(txtFieldPassword.getText());
+                //tabPane.getTabs().remove(tabLogin);
+                //tabPane.getTabs().add(tabMain);
+                //lblUsername.setTextFill(Color.BLACK);
+                //lblInfo.setVisible(false);
+                lblInformationLoginScene.setText("successfully login");
 
+
+            } else {
+                iconPasswordLogin.setFill(Color.RED);
+                lblLoginPasswordMessage.setVisible(true);
+            }
+        }
     }
 
     @FXML
@@ -134,8 +165,39 @@ public class Controller implements Initializable {
 //        window.show();
     }
 
+//    public void goToLoginScreen(ActionEvent actionEvent) {
+//        FxmlLoader fxmlLoader = new FxmlLoader();
+//        //fxmlLoader.getStage("login");
+//        if (cmbMyAccount.getValue().contains("Login")) {
+//            fxmlLoader.getStage("login");
+//        }
+//    }
+//
+//    public String getChoice(ComboBox<String> cmbMyAccount) {
+//        String option = cmbMyAccount.getValue();
+//        return option;
+//    }
+
     @FXML
-    public void displayMyAccountScreen(MouseEvent mouseEvent) {
+    public void displayMyAccountItems(MouseEvent mouseEvent) {
+        ObservableList<String> myAccount = FXCollections.observableArrayList("Edit", "Login", "Register");
+        cmbMyAccount.setItems(myAccount);
+    }
+    public void loginOptionFromMyAccountButton(ActionEvent actionEvent){
+        FxmlLoader fxmlLoader = new FxmlLoader();
+        cmbMyAccount.setOnAction(e -> {
+            switch (cmbMyAccount.getValue()) {
+                case "Login":
+                    fxmlLoader.getStage("login");
+                    break;
+                case "Edit":
+                    fxmlLoader.getStage("edit");
+                    break;
+                case "Register":
+                    fxmlLoader.getStage("register");
+                    break;
+            }
+        });
     }
 
     @FXML

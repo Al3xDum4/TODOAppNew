@@ -103,6 +103,8 @@
                   </HBox>
                </children>
             </VBox>
+            <Label fx:id="lblRegisterUsernameMessage" alignment="CENTER" layoutX="552.0" layoutY="55.0" opacity="0.37" prefHeight="33.0" prefWidth="183.0" style="-fx-border-color: black; -fx-border-radius: 10;" text="Username already exists" textAlignment="CENTER" textFill="#f80000" />
+            <Label fx:id="lblRegisterPasswordMessage" alignment="CENTER" layoutX="552.0" layoutY="148.0" opacity="0.37" prefHeight="50.0" prefWidth="183.0" style="-fx-border-color: black; -fx-border-radius: 10;" text="Password must contain at least 8 characters" textAlignment="CENTER" textFill="#f80000" wrapText="true" />
          </children>
       </AnchorPane>
    </center>

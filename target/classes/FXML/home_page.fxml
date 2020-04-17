@@ -81,7 +81,7 @@
                               <Insets />
                            </HBox.margin>
                         </ImageView>
-                        <ComboBox onMouseClicked="#displayMyAccountScreen" prefHeight="31.0" prefWidth="142.0" promptText="   my account" style="-fx-background-color: transparent;">
+                        <ComboBox fx:id="cmbMyAccount" onAction="#loginOptionFromMyAccountButton" onMouseClicked="#displayMyAccountItems" prefHeight="31.0" prefWidth="131.0" promptText="my account" style="-fx-background-color: transparent;">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>

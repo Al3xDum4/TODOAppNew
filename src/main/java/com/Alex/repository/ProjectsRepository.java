@@ -5,6 +5,7 @@ import com.Alex.model.User;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
 public class ProjectsRepository implements CrudRepository<Project, Integer> {
     private EntityManager entityManager;
@@ -28,8 +29,8 @@ public class ProjectsRepository implements CrudRepository<Project, Integer> {
 
     @Override
     public void deleteById(Integer id) {
-        Project project = findById(id);
-        if (project != null) {
+        Optional<Project> project = findById(id);
+        if (project.isPresent()) {
             entityManager.getTransaction().begin();
             entityManager.remove(project);
             entityManager.getTransaction().commit();
@@ -37,14 +38,14 @@ public class ProjectsRepository implements CrudRepository<Project, Integer> {
     }
 
     @Override
-    public Project findById(Integer id) {
+    public Optional<Project> findById(Integer id) {
         try {
             Project project = entityManager.find(Project.class, id);
-            return project;
+            return Optional.of(project);
         } catch (Exception e) {
             System.out.println("Something went wrong...");
         }
-        return null;
+        return Optional.empty();
     }
 
     public Project findByName(String name) {

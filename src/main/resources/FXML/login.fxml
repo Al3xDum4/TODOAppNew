@@ -48,7 +48,7 @@
                <children>
                   <HBox alignment="CENTER" style="-fx-border-color: black; -fx-border-width: 0px 0px 2px 0px;">
                      <children>
-                        <FontAwesomeIconView glyphName="USER" size="16.0" />
+                        <FontAwesomeIconView fx:id="iconUsernameLogin" glyphName="USER" size="16.0" />
                         <TextField fx:id="txtFieldUsernameLoginScene" promptText="username" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS" />
                      </children>
                      <opaqueInsets>
@@ -62,7 +62,7 @@
                      <children>
                         <AnchorPane>
                            <children>
-                              <FontAwesomeIconView glyphName="LOCK" layoutY="22.0" size="16.0" />
+                              <FontAwesomeIconView fx:id="iconPasswordLogin" glyphName="LOCK" layoutY="22.0" size="16.0" />
                               <PasswordField fx:id="pwdFieldPasswordLoginScene" layoutX="11.0" prefHeight="31.0" prefWidth="245.0" promptText="password" style="-fx-background-color: transparent;" />
                               <Button fx:id="btn_showPassword" layoutX="249.0" mnemonicParsing="false" onAction="#showPassword" prefHeight="31.0" prefWidth="22.0" style="-fx-background-color: TRANSPARENT;">
                                  <graphic>
@@ -130,6 +130,8 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" />
                </opaqueInsets>
             </VBox>
+            <Label fx:id="lblLoginUsernameMessage" alignment="CENTER" layoutX="561.0" layoutY="55.0" opacity="0.37" prefHeight="33.0" prefWidth="183.0" style="-fx-border-color: black; -fx-border-radius: 10;" text="User is not found" textAlignment="CENTER" textFill="#f80000" />
+            <Label fx:id="lblLoginPasswordMessage" alignment="CENTER" layoutX="561.0" layoutY="110.0" opacity="0.37" prefHeight="33.0" prefWidth="183.0" style="-fx-border-color: black; -fx-border-radius: 10;" text="Password is incorrect" textAlignment="CENTER" textFill="#f80000" wrapText="true" />
          </children>
       </AnchorPane>
    </center>

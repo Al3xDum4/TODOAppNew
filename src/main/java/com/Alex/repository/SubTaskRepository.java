@@ -1,10 +1,10 @@
 package com.Alex.repository;
 
-import com.Alex.model.Project;
 import com.Alex.model.SubTask;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
 public class SubTaskRepository implements CrudRepository<SubTask, Integer> {
     private EntityManager entityManager;
@@ -27,8 +27,8 @@ public class SubTaskRepository implements CrudRepository<SubTask, Integer> {
 
     @Override
     public void deleteById(Integer id) {
-        SubTask subTask = findById(id);
-        if (subTask != null) {
+        Optional<SubTask> subTask = findById(id);
+        if (subTask.isPresent()) {
             entityManager.getTransaction().begin();
             entityManager.remove(subTask);
             entityManager.getTransaction().commit();
@@ -36,14 +36,14 @@ public class SubTaskRepository implements CrudRepository<SubTask, Integer> {
     }
 
     @Override
-    public SubTask findById(Integer id) {
+    public Optional<SubTask> findById(Integer id) {
         try {
             SubTask subTask = entityManager.find(SubTask.class, id);
-            return subTask;
+            return Optional.of(subTask);
         }catch (Exception e){
             System.out.println("Something went wrong...");
         }
-        return null;
+        return Optional.empty();
     }
 
     public SubTask findByName(String name) {

@@ -13,7 +13,7 @@ import java.net.URL;
 
 public class FxmlLoader {
     private Pane pane;
-    private Stage stage;
+    //private Stage stage;
 
     public Pane getPane(String fileName) {
         try {
@@ -28,27 +28,24 @@ public class FxmlLoader {
         return pane;
     }
 
-    public Pane getStage(String fileName) {
+    public Stage getStage(String fileName) {
+        Stage newStage = new Stage();
         try {
+            //Stage newStage = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader();
             InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream("/FXML/" + fileName + ".fxml");
             if (resourceAsStream == null) {
                 throw new java.io.FileNotFoundException("Fxml file can't be found");
             }
-            //Parent borderPaneParent = fxmlLoader.load(resourceAsStream);
-            //Scene borderPaneScene = new Scene(borderPaneParent, 800, 600);
-
-            pane = fxmlLoader.load(resourceAsStream);
-            Scene scene = new Scene(pane,800,600);
-            stage.setScene(scene);
-
-            //stage = (Stage) borderPaneScene.getWindow();
-            //stage.show();
+            Parent root = fxmlLoader.load(resourceAsStream);
+            Scene scene = new Scene(root, 800, 600);
+            newStage.setScene(scene);
+            newStage.show();
 
         } catch (Exception e) {
             System.out.println("No stage " + "'" + fileName + "'" + " please check FxmlLoader.");
 
         }
-        return pane;
+        return newStage;
     }
 }

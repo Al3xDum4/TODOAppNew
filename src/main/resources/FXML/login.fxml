@@ -69,7 +69,7 @@
                                     <FontAwesomeIconView glyphName="EYE" />
                                  </graphic>
                               </Button>
-                              <TextField fx:id="txtFieldPassword" layoutX="11.0" layoutY="-1.0" prefHeight="31.0" prefWidth="245.0" style="-fx-background-color: transparent;" />
+                              <TextField fx:id="txtFieldPassword" layoutX="11.0" layoutY="-1.0" prefHeight="31.0" prefWidth="245.0" style="-fx-background-color: transparent;" visible="false" />
                            </children>
                            <HBox.margin>
                               <Insets />
@@ -100,7 +100,7 @@
                   </HBox>
                   <HBox alignment="CENTER">
                      <children>
-                        <Button fx:id="btnLoginLoginScene" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="31.0" prefWidth="215.0" style="-fx-background-color: #ded6d3; -fx-background-radius: 100; -fx-text-fill: black; -fx-font-weight: bold;" text="Login" HBox.hgrow="ALWAYS">
+                        <Button fx:id="btnLoginLoginScene" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#loginUser" prefHeight="31.0" prefWidth="215.0" style="-fx-background-color: #ded6d3; -fx-background-radius: 100; -fx-text-fill: black; -fx-font-weight: bold;" text="Login" HBox.hgrow="ALWAYS">
                            <effect>
                               <DropShadow />
                            </effect>
@@ -130,8 +130,8 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" />
                </opaqueInsets>
             </VBox>
-            <Label fx:id="lblLoginUsernameMessage" alignment="CENTER" layoutX="561.0" layoutY="55.0" opacity="0.37" prefHeight="33.0" prefWidth="183.0" style="-fx-border-color: black; -fx-border-radius: 10;" text="User is not found" textAlignment="CENTER" textFill="#f80000" />
-            <Label fx:id="lblLoginPasswordMessage" alignment="CENTER" layoutX="561.0" layoutY="110.0" opacity="0.37" prefHeight="33.0" prefWidth="183.0" style="-fx-border-color: black; -fx-border-radius: 10;" text="Password is incorrect" textAlignment="CENTER" textFill="#f80000" wrapText="true" />
+            <Label fx:id="lblLoginUsernameMessage" alignment="CENTER" layoutX="561.0" layoutY="55.0" opacity="0.37" prefHeight="33.0" prefWidth="183.0" style="-fx-border-color: black; -fx-border-radius: 10;" text="User is not found" textAlignment="CENTER" textFill="#f80000" visible="false" />
+            <Label fx:id="lblLoginPasswordMessage" alignment="CENTER" layoutX="561.0" layoutY="110.0" opacity="0.37" prefHeight="33.0" prefWidth="183.0" style="-fx-border-color: black; -fx-border-radius: 10;" text="Password is incorrect" textAlignment="CENTER" textFill="#f80000" visible="false" wrapText="true" />
          </children>
       </AnchorPane>
    </center>

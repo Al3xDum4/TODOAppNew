@@ -28,7 +28,7 @@ public class TasksRepository implements CrudRepository<Task, Integer> {
     @Override
     public void deleteById(Integer id) {
         Optional<Task> task = findById(id);
-        if (task != null) {
+        if (task.isPresent()) {
             entityManager.getTransaction().begin();
             entityManager.remove(task);
             entityManager.getTransaction().commit();
@@ -43,7 +43,7 @@ public class TasksRepository implements CrudRepository<Task, Integer> {
         }catch (Exception e){
             System.out.println("Something went wrong...");
         }
-        return null;
+        return Optional.empty();
     }
 
     public Task findByName(String name) {

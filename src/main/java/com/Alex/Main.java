@@ -1,5 +1,6 @@
 package com.Alex;
 
+import com.Alex.model.User;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -8,7 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import javax.jws.soap.SOAPBinding;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 public class Main extends Application {
 
@@ -22,6 +25,7 @@ public class Main extends Application {
         Parent root = fxmlLoader.load(resourceAsStream);
         primaryStage.setScene(new Scene(root, 1100, 700));
         primaryStage.show();
+
     }
     public static void main(String[] args) {
         launch(args);

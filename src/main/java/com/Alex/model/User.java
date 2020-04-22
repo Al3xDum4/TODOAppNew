@@ -13,6 +13,7 @@ public class User {
     private int id;
     private String username;
     private String password;
+    private String mailUser;
     private String role;
 
     public User() {
@@ -48,5 +49,13 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getMailUser() {
+        return mailUser;
+    }
+
+    public void setMailUser(String mailUser) {
+        this.mailUser = mailUser;
     }
 }

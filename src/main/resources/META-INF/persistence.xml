@@ -10,9 +10,9 @@
 <!--            driver-->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
 <!--database connection information-->
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://remotemysql.com:3306/SQ2oYluXUf"/>
-            <property name="javax.persistence.jdbc.user" value="SQ2oYluXUf"/>
-            <property name="javax.persistence.jdbc.password" value="n76mMuIwK0"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/todofx"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.password" value="Timeea24"/>
 <!--          connection to database "language" or dialect-->
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL57Dialect"/>
             <property name="hibernate.hbm2ddl.auto" value="create" />

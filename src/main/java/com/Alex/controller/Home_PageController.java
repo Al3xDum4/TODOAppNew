@@ -21,6 +21,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -33,7 +34,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 //DONE: Add scene for different operations
-//TODO: Make all the tabs hidden. Login window opens when you click an option in the menu
+//DONE: Make all the tabs hidden. Login window opens when you click an option in the menu
 //TODO: After login success show other tabs. Clear text fields. Show message.
 //TODO: After clicking register, empty text boxes, show message user registration.
 //DONE: Create other entities. Task, Subtask + repository gor each.
@@ -49,27 +50,27 @@ import java.util.ResourceBundle;
 //TODO: to add or remove project, only administrator/coordinator
 
 
-public class Controller implements Initializable {
+public class Home_PageController implements Initializable {
     @FXML
     public Label lblInformation;
-    public Label lblInformationLoginScene;
-    public Label lblLoginUsernameMessage;
-    public Label lblLoginPasswordMessage;
+    //    public Label lblInformationLoginScene;
+//    public Label lblLoginUsernameMessage;
+//    public Label lblLoginPasswordMessage;
     public Label lblRegisterUsernameMessage;
     public Label lblRegisterPasswordMessage;
 
-    public TextField txtFieldUsernameLoginScene;
+    //    public TextField txtFieldUsernameLoginScene;
     public TextField txtFieldUsernameRegisterScene;
     public TextField txtFieldEmailRegisterScene;
     public TextField txtFieldSearchHomepage;
-    public TextField txtFieldPassword;
-
-    public PasswordField pwdFieldPasswordLoginScene;
+    //    public TextField txtFieldPassword;
+//
+//    public PasswordField pwdFieldPasswordLoginScene;
     public PasswordField pwdFieldConfirmPasswordRegisterScene;
     public PasswordField pwdFieldPasswordRegisterScene;
 
-    public Button btnLoginLoginScene;
-    public Button btnRegisterLoginScene;
+    //    public Button btnLoginLoginScene;
+//    public Button btnRegisterLoginScene;
     public Button btnRegisterRegisterScene;
     public Button btn_team;
     public Button btn_dashboard;
@@ -77,36 +78,49 @@ public class Controller implements Initializable {
     public Button btn_calendar;
     public Button btn_projects;
     public Button btn_chat;
-    public Button btn_showPassword;
+    //    public Button btn_showPassword;
     public Button btn_login;
 
     public BorderPane borderPane;
-    public BorderPane loginBorderPane;
-    public BorderPane registerBorderPane;
-
-    public FontAwesomeIconView iconUsernameLogin;
-    public FontAwesomeIconView iconPasswordLogin;
+    //    public BorderPane loginBorderPane;
+//    public BorderPane registerBorderPane;
+//
+//    public FontAwesomeIconView iconUsernameLogin;
+//    public FontAwesomeIconView iconPasswordLogin;
     public FontAwesomeIconView iconUsernameRegister;
     public MaterialDesignIconView iconEmailRegister;
     public FontAwesomeIconView iconPasswordRegister;
     public FontAwesomeIconView iconConfrimPasswordRegister;
 
     public ImageView profilePicture;
-    public AnchorPane hb_team;
     public HBox hb_dashboard;
-    public VBox vboxTaskItems;
 
     public ComboBox<String> cmbMyAccount;
     public BorderPane registerPane;
+    public MenuItem mnuItemLogin;
 
     private UserRepository userRepository;
+    private User user;
     private boolean isConnectionSuccessful = false;
 
     Stage loginWindow = new Stage();
-    Stage registerWindow = new Stage();
+    //Stage registerWindow = new Stage();
 
-    public Controller() {
+//    double x = 0, y = 0;
+
+    public Home_PageController() {
     }
+
+//    public void pressed(MouseEvent event) {
+//        x = event.getSceneX();
+//        y = event.getSceneY();
+//    }
+//
+//    public void dragged(MouseEvent event, Stage stage) {
+//        stage.setX(event.getScreenX() - x);
+//        stage.setY(event.getScreenY() - y);
+//    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -127,49 +141,61 @@ public class Controller implements Initializable {
 
     @FXML
     private void registerUser(ActionEvent actionEvent) {
-        User user = userRepository.findByUsername(txtFieldUsernameRegisterScene.getText());
-        if (txtFieldUsernameRegisterScene.getText().length() < 1 || user != null) {
+        if (txtFieldUsernameRegisterScene.getText().isEmpty()) {
             iconUsernameRegister.setFill(Color.RED);
-            lblRegisterUsernameMessage.setVisible(true);
-        } else {
-            iconUsernameRegister.setFill(Color.BLACK);
+            txtFieldUsernameRegisterScene.setPromptText("enter your username");
         }
 
+        if (pwdFieldPasswordRegisterScene.getText().isEmpty()) {
+            iconPasswordRegister.setFill(Color.RED);
+            pwdFieldPasswordRegisterScene.setPromptText("enter your password");
+        }
+
+        if (pwdFieldConfirmPasswordRegisterScene.getText().isEmpty()) {
+            iconConfrimPasswordRegister.setFill(Color.RED);
+            pwdFieldConfirmPasswordRegisterScene.setPromptText("confirm your password");
+        }
+
+//        if(txtFieldUsernameRegisterScene.getText()!=null) {
+        user = userRepository.findByUsername(txtFieldUsernameRegisterScene.getText());
         if (pwdFieldPasswordRegisterScene.getText().equals(pwdFieldConfirmPasswordRegisterScene.getText()) && user == null) {
             user = new User();
             user.setUsername(txtFieldUsernameRegisterScene.getText());
             user.setPassword(pwdFieldPasswordRegisterScene.getText());
+            user.setMailUser(txtFieldEmailRegisterScene.getText());
             userRepository.save(user);
+        } else if (user != null) {
+                lblRegisterUsernameMessage.setVisible(true);
         } else {
-            //lblInformation.setText("This username is already register.Please pick other username");
             lblRegisterPasswordMessage.setVisible(true);
-            iconPasswordRegister.setFill(Color.RED);
-            iconConfrimPasswordRegister.setFill(Color.RED);
         }
     }
 
-    @FXML
-    private void loginUser(ActionEvent actionEvent) {
-        User user = userRepository.findByUsername(txtFieldUsernameLoginScene.getText());
-        if (txtFieldUsernameLoginScene.getText().isEmpty()) {
-            iconUsernameLogin.setFill(Color.RED);
-        }
-        if (!txtFieldUsernameLoginScene.getText().equals(user.getUsername())) {
-            lblLoginUsernameMessage.setVisible(true);
-        }
-    }
+//    @FXML
+//    private void loginUser(ActionEvent actionEvent) {
+//        User user = userRepository.findByUsername(txtFieldUsernameLoginScene.getText());
+//        if (txtFieldUsernameLoginScene.getText().isEmpty()) {
+//            iconUsernameLogin.setFill(Color.RED);
+//        }
+//        if (!txtFieldUsernameLoginScene.getText().equals(user.getUsername())) {
+//            lblLoginUsernameMessage.setVisible(true);
+//        }
+//
+//        loginWindow = (Stage) btnRegisterLoginScene.getScene().getWindow();
+//        loginWindow.close();
+//    }
 
-    public void showPassword(ActionEvent actionEvent) {
-        if (!txtFieldPassword.isVisible()) {
-            txtFieldPassword.setText(pwdFieldPasswordLoginScene.getText());
-            txtFieldPassword.setEditable(false);
-            txtFieldPassword.setVisible(true);
-            pwdFieldPasswordLoginScene.setVisible(false);
-        } else {
-            txtFieldPassword.setVisible(false);
-            pwdFieldPasswordLoginScene.setVisible(true);
-        }
-    }
+//    public void showPassword(ActionEvent actionEvent) {
+//        if (!txtFieldPassword.isVisible()) {
+//            txtFieldPassword.setText(pwdFieldPasswordLoginScene.getText());
+//            txtFieldPassword.setEditable(false);
+//            txtFieldPassword.setVisible(true);
+//            pwdFieldPasswordLoginScene.setVisible(false);
+//        } else {
+//            txtFieldPassword.setVisible(false);
+//            pwdFieldPasswordLoginScene.setVisible(true);
+//        }
+//    }
 
     @FXML
     public void loadLoginWindow(ActionEvent actionEvent) throws IOException {
@@ -179,20 +205,23 @@ public class Controller implements Initializable {
         Scene registerScene = new Scene(root2);
         loginWindow = new Stage();
         loginWindow.setScene(registerScene);
+        loginWindow.initStyle(StageStyle.TRANSPARENT);
         loginWindow.show();
     }
 
-    @FXML
-    public void goToRegisterScene(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream("FXML/register.fxml");
-        Parent root3 = fxmlLoader.load(resourceAsStream);
-        Scene registerScene = new Scene(root3);
-        registerWindow = new Stage();
-        registerWindow.setScene(registerScene);
-        registerWindow.show();
-        loginWindow.close();
-    }
+//    @FXML
+//    public void goToRegisterScene(ActionEvent actionEvent) throws IOException {
+//        FXMLLoader fxmlLoader = new FXMLLoader();
+//        InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream("FXML/register.fxml");
+//        Parent root3 = fxmlLoader.load(resourceAsStream);
+//        Scene registerScene = new Scene(root3);
+//        registerWindow = new Stage();
+//        registerWindow.setScene(registerScene);
+//        registerWindow.initStyle(StageStyle.TRANSPARENT);
+//        loginWindow.close();
+//        registerWindow.show();
+//        //loginWindow.close();
+//    }
 
     @FXML
     public void displayMyAccountItems(MouseEvent mouseEvent) {
@@ -253,4 +282,6 @@ public class Controller implements Initializable {
         Pane pane = fxmlLoader.getPane("chat");
         borderPane.setCenter(pane);
     }
+
+
 }

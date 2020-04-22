@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="596.0" prefWidth="938.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="596.0" prefWidth="938.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.Alex.controller.MyProjectController">
    <top>
       <VBox BorderPane.alignment="CENTER">
          <children>
@@ -28,12 +32,23 @@
                </VBox.margin>
             </HBox>
             <Separator prefWidth="200.0" />
-            <HBox spacing="10.0">
+            <HBox alignment="CENTER_LEFT">
                <children>
-                  <TextField prefHeight="31.0" prefWidth="310.0" promptText="add or search project" />
-                  <Region prefHeight="31.0" prefWidth="80.0" />
-                  <Button mnemonicParsing="false" text="Add" />
-                  <Button mnemonicParsing="false" text="Remove" />
+                  <TextField fx:id="txtFieldProject" prefHeight="31.0" prefWidth="421.0" promptText="add or search project" />
+                  <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#searchProject" style="-fx-background-color: TRANSPARENT;">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="SEARCH" size="15.0" />
+                     </graphic>
+                  </Button>
+                  <Region prefHeight="31.0" prefWidth="50.0">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin></Region>
+                  <Button fx:id="btnAddProject" mnemonicParsing="false" onAction="#addProject" text="Add">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin></Button>
+                  <Button fx:id="btnRemoveProject" mnemonicParsing="false" onAction="#removeProject" text="Remove" />
                </children>
                <VBox.margin>
                   <Insets left="8.0" right="8.0" />
@@ -43,10 +58,59 @@
                </padding>
             </HBox>
             <Separator prefWidth="200.0" />
+            <HBox prefHeight="70.0" prefWidth="922.0" spacing="30.0">
+               <children>
+                  <VBox alignment="TOP_CENTER">
+                     <children>
+                        <Label text="Start" />
+                        <DatePicker fx:id="dtpkStart" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER">
+                     <children>
+                        <Label text="Deadline" />
+                        <DatePicker fx:id="dtpkDeadline" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER">
+                     <children>
+                        <Label text="Coordinator" />
+                        <ComboBox fx:id="cmbCoordinator" prefWidth="150.0" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER">
+                     <children>
+                        <Label text="Allows" />
+                        <ComboBox fx:id="cmdAllows" prefWidth="150.0" />
+                     </children>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets left="8.0" right="8.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </HBox>
          </children>
       </VBox>
    </top>
    <bottom>
-      <Label text="Label" BorderPane.alignment="CENTER" />
+      <HBox visible="false" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Label" />
+         </children>
+      </HBox>
    </bottom>
+   <center>
+      <TableView fx:id="tvProjects" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="tvclName" prefWidth="271.0" text="Name" />
+          <TableColumn fx:id="tvclStart" minWidth="5.0" prefWidth="86.0" text="Start" />
+            <TableColumn fx:id="tvclDeadline" prefWidth="101.0" text="Deadline" />
+            <TableColumn fx:id="tvclCoordinator" prefWidth="126.0" text="Coordinator" />
+            <TableColumn fx:id="tvclAlloes" prefWidth="119.0" text="Allows" />
+        </columns>
+      </TableView>
+   </center>
 </BorderPane>

@@ -1,5 +1,7 @@
 package com.Alex.model;
 
+import javafx.scene.control.DatePicker;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -12,11 +14,9 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_project;
     private String projectName;
-    private Date projectStartDate;
-    private Date projectDeadline;
+    private DatePicker projectStartDate;
+    private DatePicker projectDeadline;
     private String projectDescription;
-    private List<User> projectAssignUsers;
-    private List<Task> tasksList;
     private boolean projectCompleted;
 
     public Project() {
@@ -38,19 +38,19 @@ public class Project {
         this.projectName = projectName;
     }
 
-    public Date getProjectStartDate() {
+    public DatePicker getProjectStartDate() {
         return projectStartDate;
     }
 
-    public void setProjectStartDate(Date projectStartDate) {
+    public void setProjectStartDate(DatePicker projectStartDate) {
         this.projectStartDate = projectStartDate;
     }
 
-    public Date getProjectDeadline() {
+    public DatePicker getProjectDeadline() {
         return projectDeadline;
     }
 
-    public void setProjectDeadline(Date projectDeadline) {
+    public void setProjectDeadline(DatePicker projectDeadline) {
         this.projectDeadline = projectDeadline;
     }
 
@@ -60,22 +60,6 @@ public class Project {
 
     public void setProjectDescription(String projectDescription) {
         this.projectDescription = projectDescription;
-    }
-
-    public List<User> getProjectAssignUsers() {
-        return projectAssignUsers;
-    }
-
-    public void setProjectAssignUsers(List<User> projectAssignUsers) {
-        this.projectAssignUsers = projectAssignUsers;
-    }
-
-    public List<Task> getTasksList() {
-        return tasksList;
-    }
-
-    public void setTasksList(List<Task> tasksList) {
-        this.tasksList = tasksList;
     }
 
     public boolean isProjectCompleted() {

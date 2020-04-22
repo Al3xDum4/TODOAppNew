@@ -2,6 +2,7 @@ package com.Alex;
 
 import com.Alex.model.User;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,6 +25,7 @@ public class Main extends Application {
         InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream("FXML/home_page.fxml");
         Parent root = fxmlLoader.load(resourceAsStream);
         primaryStage.setScene(new Scene(root, 1100, 700));
+        primaryStage.setOnHidden(e -> Platform.exit());
         primaryStage.show();
 
     }

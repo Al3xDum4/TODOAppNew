@@ -14,8 +14,8 @@ public class SubTaskRepository implements CrudRepository<SubTask, Integer> {
     }
 
     @Override
-    public List findAll() {
-        return null;
+    public List<SubTask> findAll() {
+        return entityManager.createQuery("SELECT s FROM SubTask s").getResultList();
     }
 
     @Override
@@ -49,7 +49,7 @@ public class SubTaskRepository implements CrudRepository<SubTask, Integer> {
     public SubTask findByName(String name) {
         try {
             SubTask subTask = (SubTask) entityManager
-                    .createQuery("SELECT u  FROM SubTask u WHERE u.name = :name")
+                    .createQuery("SELECT u  FROM SubTasks u WHERE u.name = :name")
                     .setParameter("name", name)
                     .getResultList()
                     .get(0);

@@ -1,8 +1,9 @@
 package com.Alex.model;
 
-import javafx.scene.control.DatePicker;
+import javafx.scene.control.TreeItem;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -12,22 +13,32 @@ public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_project;
+    @Column(name = "project_id")
+    private int project_id;
+    @Column(name = "name")
     private String projectName;
-    private DatePicker projectStartDate;
-    private DatePicker projectDeadline;
+    @Column(name = "start_date")
+    private Date projectStartDate;
+    @Column(name = "deadline")
+    private Date projectDeadline;
     private String projectDescription;
     private boolean projectCompleted;
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    private List<Task> taskList;
+
+    @ManyToMany(mappedBy = "projects")
+    private List<User> users;
 
     public Project() {
     }
 
     public int getId_project() {
-        return id_project;
+        return project_id;
     }
 
     public void setId_project(int id_project) {
-        this.id_project = id_project;
+        this.project_id = id_project;
     }
 
     public String getProjectName() {
@@ -38,19 +49,19 @@ public class Project {
         this.projectName = projectName;
     }
 
-    public DatePicker getProjectStartDate() {
+    public Date getProjectStartDate() {
         return projectStartDate;
     }
 
-    public void setProjectStartDate(DatePicker projectStartDate) {
+    public void setProjectStartDate(Date projectStartDate) {
         this.projectStartDate = projectStartDate;
     }
 
-    public DatePicker getProjectDeadline() {
+    public Date getProjectDeadline() {
         return projectDeadline;
     }
 
-    public void setProjectDeadline(DatePicker projectDeadline) {
+    public void setProjectDeadline(Date projectDeadline) {
         this.projectDeadline = projectDeadline;
     }
 
@@ -70,5 +81,16 @@ public class Project {
         this.projectCompleted = projectCompleted;
     }
 
+    public List<Task> getTaskList() {
+        return taskList;
+    }
 
+    public void setTaskList(List<Task> taskList) {
+        this.taskList = taskList;
+    }
+
+    @Override
+    public String toString() {
+        return this.projectName;
+    }
 }

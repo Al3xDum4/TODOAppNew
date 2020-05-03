@@ -18,7 +18,7 @@
    <children>
       <BorderPane fx:id="loginBorderPane" layoutX="9.0" layoutY="9.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0">
          <bottom>
-            <Label fx:id="lblInformationLoginScene" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="800.0" BorderPane.alignment="CENTER" />
+            <Label fx:id="lblInformationLoginScene" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="800.0" textAlignment="CENTER" BorderPane.alignment="CENTER" />
          </bottom>
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
@@ -28,7 +28,7 @@
                         <HBox alignment="CENTER" style="-fx-border-color: black; -fx-border-width: 0px 0px 2px 0px;">
                            <children>
                               <FontAwesomeIconView fx:id="iconUsernameLogin" glyphName="USER" size="16.0" />
-                              <TextField fx:id="txtFieldUsernameLoginScene" promptText="username" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS" />
+                              <TextField fx:id="txtFieldUsernameLoginScene" onKeyPressed="#clearErrorIssueTxtUserLogin" onMouseClicked="#clearTxtField" promptText="username" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS" />
                            </children>
                            <opaqueInsets>
                               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -41,8 +41,8 @@
                            <children>
                               <AnchorPane>
                                  <children>
+                                    <PasswordField fx:id="pwdFieldPasswordLoginScene" layoutX="11.0" onKeyPressed="#clearErrorIssuePwdUserLogin" onMouseClicked="#clearPwdField" prefHeight="31.0" prefWidth="245.0" promptText="password" style="-fx-background-color: transparent;" />
                                     <FontAwesomeIconView fx:id="iconPasswordLogin" glyphName="LOCK" layoutY="22.0" size="16.0" />
-                                    <PasswordField fx:id="pwdFieldPasswordLoginScene" layoutX="11.0" prefHeight="31.0" prefWidth="245.0" promptText="password" style="-fx-background-color: transparent;" />
                                     <Button fx:id="btn_showPassword" layoutX="249.0" mnemonicParsing="false" onAction="#showPassword" prefHeight="31.0" prefWidth="22.0" style="-fx-background-color: TRANSPARENT;">
                                        <graphic>
                                           <FontAwesomeIconView glyphName="EYE" />

@@ -15,7 +15,7 @@
             <property name="javax.persistence.jdbc.password" value="Timeea24"/>
 <!--          connection to database "language" or dialect-->
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL57Dialect"/>
-            <property name="hibernate.hbm2ddl.auto" value="create" />
+            <property name="hibernate.hbm2ddl.auto" value="update" />
 
         </properties>
 

@@ -16,8 +16,8 @@ public class ProjectsRepository implements CrudRepository<Project, Integer> {
 
 
     @Override
-    public List findAll() {
-        return null;
+    public List<Project> findAll() {
+        return entityManager.createQuery("SELECT p FROM Project p").getResultList();
     }
 
     @Override

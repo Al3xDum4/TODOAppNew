@@ -12,105 +12,199 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="596.0" prefWidth="938.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.Alex.controller.MyProjectController">
    <top>
       <VBox BorderPane.alignment="CENTER">
          <children>
-            <HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="922.0" spacing="7.0">
                <children>
-                  <Label text="Projects">
+                  <VBox alignment="BOTTOM_CENTER">
                      <HBox.margin>
-                        <Insets left="10.0" />
+                        <Insets bottom="14.0" />
                      </HBox.margin>
-                  </Label>
-               </children>
-               <VBox.margin>
-                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-               </VBox.margin>
-            </HBox>
-            <Separator prefWidth="200.0" />
-            <HBox alignment="CENTER_LEFT">
-               <children>
-                  <TextField fx:id="txtFieldProject" prefHeight="31.0" prefWidth="421.0" promptText="add or search project" />
-                  <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#searchProject" style="-fx-background-color: TRANSPARENT;">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="SEARCH" size="15.0" />
-                     </graphic>
-                  </Button>
-                  <Region prefHeight="31.0" prefWidth="50.0">
+                     <children>
+                        <VBox>
+                           <VBox.margin>
+                              <Insets bottom="15.0" />
+                           </VBox.margin>
+                           <children>
+                              <Label style="-fx-font-weight: bold;" text="Project" underline="true" />
+                           </children>
+                        </VBox>
+                        <TextField fx:id="txtFieldProject" prefHeight="31.0" prefWidth="330.0" promptText="add or search project" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER">
+                     <children>
+                        <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#searchProject" style="-fx-background-color: TRANSPARENT;">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="SEARCH" size="15.0" />
+                           </graphic>
+                        </Button>
+                     </children>
                      <HBox.margin>
-                        <Insets right="20.0" />
-                     </HBox.margin></Region>
-                  <Button fx:id="btnAddProject" mnemonicParsing="false" onAction="#addProject" text="Add">
+                        <Insets bottom="14.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER">
+                     <children>
+                        <Label text="Start" underline="true" />
+                        <DatePicker fx:id="dtpkStart" prefHeight="31.0" prefWidth="90.0" />
+                     </children>
                      <HBox.margin>
-                        <Insets right="20.0" />
-                     </HBox.margin></Button>
-                  <Button fx:id="btnRemoveProject" mnemonicParsing="false" onAction="#removeProject" text="Remove" />
+                        <Insets bottom="14.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER">
+                     <children>
+                        <Label text="Deadline" underline="true" />
+                        <DatePicker fx:id="dtpkDeadline" prefHeight="31.0" prefWidth="90.0" />
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="14.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER">
+                     <children>
+                        <Label text="Coordinator" underline="true" />
+                        <ComboBox fx:id="cmbCoordinator" prefHeight="31.0" prefWidth="100.0" />
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="14.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER">
+                     <children>
+                        <Label text="Allows" underline="true" />
+                        <ComboBox fx:id="cmdAllows" prefHeight="31.0" prefWidth="100.0">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </ComboBox>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="14.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER">
+                     <HBox.margin>
+                        <Insets bottom="14.0" />
+                     </HBox.margin>
+                     <children>
+                        <VBox>
+                           <children>
+                              <Button fx:id="btnAddProject" mnemonicParsing="false" onAction="#addProject" text="Add">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </Button>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER">
+                     <children>
+                        <VBox>
+                           <children>
+                              <Button fx:id="btnRemoveProject" mnemonicParsing="false" onAction="#removeProject" text="Remove">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </Button>
+                           </children>
+                        </VBox>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="14.0" />
+                     </HBox.margin>
+                  </VBox>
                </children>
                <VBox.margin>
                   <Insets left="8.0" right="8.0" />
                </VBox.margin>
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
             </HBox>
             <Separator prefWidth="200.0" />
-            <HBox prefHeight="70.0" prefWidth="922.0" spacing="30.0">
-               <children>
-                  <VBox alignment="TOP_CENTER">
-                     <children>
-                        <Label text="Start" />
-                        <DatePicker fx:id="dtpkStart" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="TOP_CENTER">
-                     <children>
-                        <Label text="Deadline" />
-                        <DatePicker fx:id="dtpkDeadline" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="TOP_CENTER">
-                     <children>
-                        <Label text="Coordinator" />
-                        <ComboBox fx:id="cmbCoordinator" prefWidth="150.0" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="TOP_CENTER">
-                     <children>
-                        <Label text="Allows" />
-                        <ComboBox fx:id="cmdAllows" prefWidth="150.0" />
-                     </children>
-                  </VBox>
-               </children>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="922.0" spacing="7.0">
                <VBox.margin>
                   <Insets left="8.0" right="8.0" />
                </VBox.margin>
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
+               <children>
+                  <VBox alignment="BOTTOM_CENTER">
+                     <children>
+                        <VBox>
+                           <children>
+                              <Label style="-fx-font-weight: bold;" text="Task" underline="true" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="15.0" />
+                           </VBox.margin>
+                        </VBox>
+                        <TextField fx:id="txtFieldAddTask" prefHeight="31.0" prefWidth="429.0" promptText="add task" />
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="14.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER">
+                     <children>
+                        <Label text="Project" underline="true" />
+                        <ComboBox fx:id="cmbChooseProject" prefWidth="150.0" />
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="14.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER">
+                     <children>
+                        <Label text="Start" underline="true" />
+                        <DatePicker fx:id="dateTaskStart" prefWidth="90.0" />
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="14.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER">
+                     <children>
+                        <Label text="Deadline" underline="true" />
+                        <DatePicker fx:id="dateTaskDeadline" prefWidth="90.0" />
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="14.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER">
+                     <children>
+                        <Button fx:id="btnAddTask" mnemonicParsing="false" onAction="#addTask" text="Add" />
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="14.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER">
+                     <children>
+                        <Button fx:id="btnRemoveTask" mnemonicParsing="false" onAction="#removeTask" text="Remove" />
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="14.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
             </HBox>
          </children>
       </VBox>
    </top>
-   <bottom>
-      <HBox visible="false" BorderPane.alignment="CENTER">
-         <children>
-            <Label text="Label" />
-         </children>
-      </HBox>
-   </bottom>
    <center>
       <TableView fx:id="tvProjects" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn fx:id="tvclName" prefWidth="271.0" text="Name" />
           <TableColumn fx:id="tvclStart" minWidth="5.0" prefWidth="86.0" text="Start" />
             <TableColumn fx:id="tvclDeadline" prefWidth="101.0" text="Deadline" />
-            <TableColumn fx:id="tvclCoordinator" prefWidth="126.0" text="Coordinator" />
-            <TableColumn fx:id="tvclAlloes" prefWidth="119.0" text="Allows" />
         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
    </center>
 </BorderPane>

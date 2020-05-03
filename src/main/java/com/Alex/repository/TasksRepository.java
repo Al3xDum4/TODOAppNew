@@ -15,7 +15,7 @@ public class TasksRepository implements CrudRepository<Task, Integer> {
 
     @Override
     public List<Task> findAll() {
-        return null;
+        return entityManager.createQuery("SELECT t FROM Task t").getResultList();
     }
 
     @Override
@@ -40,7 +40,7 @@ public class TasksRepository implements CrudRepository<Task, Integer> {
         try {
             Task task = entityManager.find(Task.class, id);
             return Optional.of(task);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Something went wrong...");
         }
         return Optional.empty();
@@ -49,7 +49,7 @@ public class TasksRepository implements CrudRepository<Task, Integer> {
     public Task findByName(String name) {
         try {
             Task task = (Task) entityManager
-                    .createQuery("SELECT u  FROM Task u WHERE u.name = :name")
+                    .createQuery("SELECT u  FROM Tasks u WHERE u.name = :name")
                     .setParameter("name", name)
                     .getResultList()
                     .get(0);

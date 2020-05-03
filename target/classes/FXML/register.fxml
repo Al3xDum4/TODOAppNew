@@ -36,7 +36,7 @@
                         <HBox alignment="CENTER" style="-fx-border-color: black; -fx-border-width: 0px 0px 2px 0px;">
                            <children>
                               <FontAwesomeIconView fx:id="iconUsernameRegister" glyphName="USER" size="16.0" />
-                              <TextField fx:id="txtFieldUsernameRegisterScene" promptText="username" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS" />
+                              <TextField fx:id="txtFieldUsernameRegisterScene" onKeyPressed="#clearErrorIssueTxtUserRegister" onMouseClicked="#clearTxtFieldUserReg" promptText="username" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS" />
                            </children>
                            <VBox.margin>
                               <Insets bottom="20.0" />
@@ -53,8 +53,18 @@
                         </HBox>
                         <HBox alignment="CENTER" layoutX="30.0" layoutY="74.0" style="-fx-border-color: black; -fx-border-width: 0px 0px 2px 0px;">
                            <children>
-                              <FontAwesomeIconView fx:id="iconPasswordRegister" glyphName="LOCK" size="16.0" />
-                              <PasswordField fx:id="pwdFieldPasswordRegisterScene" promptText="password" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS" />
+                              <AnchorPane>
+                                 <children>
+                                    <FontAwesomeIconView fx:id="iconPasswordRegister" glyphName="LOCK" layoutY="22.0" size="16.0" />
+                                    <PasswordField fx:id="pwdFieldPasswordRegisterScene" layoutX="11.0" onKeyPressed="#clearErrorIssuePwdRegister" onMouseClicked="#clearPwdFldPassReg" prefHeight="31.0" prefWidth="246.0" promptText="password" style="-fx-background-color: transparent;" />
+                                    <Button fx:id="btn_showPassword" layoutX="249.0" mnemonicParsing="false" onAction="#showPassword" prefHeight="31.0" prefWidth="22.0" style="-fx-background-color: TRANSPARENT;">
+                                       <graphic>
+                                          <FontAwesomeIconView glyphName="EYE" />
+                                       </graphic>
+                                    </Button>
+                                    <TextField fx:id="txtFieldPassRegister" layoutX="11.0" prefHeight="31.0" prefWidth="246.0" style="-fx-background-color: TRANSPARENT;" visible="false" />
+                                 </children>
+                              </AnchorPane>
                            </children>
                            <VBox.margin>
                               <Insets bottom="20.0" />
@@ -62,8 +72,18 @@
                         </HBox>
                         <HBox alignment="CENTER" style="-fx-border-color: black; -fx-border-width: 0px 0px 2px 0px;">
                            <children>
-                              <FontAwesomeIconView fx:id="iconConfrimPasswordRegister" glyphName="LOCK" size="16.0" />
-                              <PasswordField fx:id="pwdFieldConfirmPasswordRegisterScene" promptText="confirm password" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS" />
+                              <AnchorPane>
+                                 <children>
+                                    <FontAwesomeIconView fx:id="iconConfrimPasswordRegister" glyphName="LOCK" layoutY="22.0" size="16.0" />
+                                    <PasswordField fx:id="pwdFieldConfirmPasswordRegisterScene" layoutX="11.0" onKeyPressed="#clearErrorIssuePwdConfirmRegister" onMouseClicked="#clearPwdFldConfPassReg" prefHeight="31.0" prefWidth="246.0" promptText="confirm password" style="-fx-background-color: transparent;" />
+                                    <Button fx:id="btn_showPassword1" layoutX="249.0" mnemonicParsing="false" onAction="#showConfirmPassword" prefHeight="31.0" prefWidth="22.0" style="-fx-background-color: TRANSPARENT;">
+                                       <graphic>
+                                          <FontAwesomeIconView glyphName="EYE" />
+                                       </graphic>
+                                    </Button>
+                                    <TextField fx:id="txtFieldConfirmPassRegister" layoutX="11.0" prefHeight="31.0" prefWidth="246.0" style="-fx-background-color: TRANSPARENT;" visible="false" />
+                                 </children>
+                              </AnchorPane>
                            </children>
                            <VBox.margin>
                               <Insets bottom="20.0" />
@@ -79,6 +99,18 @@
                            </children>
                            <VBox.margin>
                               <Insets top="30.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="31.0" prefWidth="281.0">
+                           <children>
+                              <Button fx:id="btnLoginRegisterScene" mnemonicParsing="false" onAction="#goBackToLoginScene" prefHeight="43.0" prefWidth="200.0" style="-fx-background-color: TRANSPARENT;" text="Login" textFill="#828181" HBox.hgrow="ALWAYS">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="BACKWARD" wrappingWidth="11.142857551574707" />
+                                 </graphic>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="40.0" />
                            </VBox.margin>
                         </HBox>
                      </children>

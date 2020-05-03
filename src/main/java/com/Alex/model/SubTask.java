@@ -1,6 +1,7 @@
 package com.Alex.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "subTasks")
@@ -8,10 +9,15 @@ public class SubTask {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "subTask_id")
     private int id_subTask;
     private String subTaskName;
     private String subTaskDescription;
     private boolean subTaskCompleted;
+
+    @ManyToOne
+    private Task task;
+
 
     public SubTask() {
     }

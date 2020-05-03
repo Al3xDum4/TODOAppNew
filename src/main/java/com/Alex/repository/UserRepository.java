@@ -18,7 +18,7 @@ public class UserRepository implements CrudRepository<User, String> {
 
     @Override
     public List<User> findAll() {
-        return null;
+        return entityManager.createQuery("SELECT u FROM User u").getResultList();
     }
 
     @Override

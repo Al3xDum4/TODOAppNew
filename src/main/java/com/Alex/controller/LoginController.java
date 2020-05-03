@@ -1,7 +1,6 @@
 package com.Alex.controller;
 
 import com.Alex.model.User;
-import com.Alex.repository.ProjectsRepository;
 import com.Alex.repository.UserRepository;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.ActionEvent;
@@ -14,6 +13,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -53,7 +54,7 @@ public class LoginController implements Initializable {
         try {
             persistenceConnection();
         } catch (Exception ex) {
-            System.out.println("Connection is allowed");
+            System.out.println("Connection is not allowed");
             isConnectionSuccessful = false;
         }
     }
@@ -80,15 +81,49 @@ public class LoginController implements Initializable {
     @FXML
     public void loginUser(ActionEvent actionEvent) {
         User user = userRepository.findByUsername(txtFieldUsernameLoginScene.getText());
-        if (txtFieldUsernameLoginScene.getText().isEmpty()) {
+        if (user != null) {
+            if (pwdFieldPasswordLoginScene.getText().equals(user.getPassword())) {
+                lblInformationLoginScene.setText("successfully connected !");
+                loginWindow = (Stage) btnLoginLoginScene.getScene().getWindow();
+                loginWindow.close();
+            } else if (!pwdFieldPasswordLoginScene.getText().equals(user.getPassword()) && pwdFieldPasswordLoginScene.getText().length() >= 1) {
+                iconPasswordLogin.setFill(Color.RED);
+                lblLoginPasswordMessage.setVisible(true);
+            } else {
+                iconPasswordLogin.setFill(Color.RED);
+                pwdFieldPasswordLoginScene.setPromptText("enter your password");
+            }
+        } else if (txtFieldUsernameLoginScene.getText().length() < 1) {
             iconUsernameLogin.setFill(Color.RED);
-        }
-        if (!txtFieldUsernameLoginScene.getText().equals(user.getUsername())) {
+            txtFieldUsernameLoginScene.setPromptText("enter your username");
+        } else {
+            iconUsernameLogin.setFill(Color.RED);
             lblLoginUsernameMessage.setVisible(true);
         }
+    }
 
-        loginWindow = (Stage) btnRegisterLoginScene.getScene().getWindow();
-        loginWindow.close();
+    @FXML
+    public void clearErrorIssueTxtUserLogin(KeyEvent keyEvent) {
+        iconUsernameLogin.setFill(Color.BLACK);
+        lblLoginUsernameMessage.setVisible(false);
+        txtFieldUsernameLoginScene.setPromptText("username");
+    }
+
+    @FXML
+    public void clearTxtField(MouseEvent mouseEvent) {
+        txtFieldUsernameLoginScene.clear();
+    }
+
+    @FXML
+    public void clearErrorIssuePwdUserLogin(KeyEvent keyEvent) {
+        iconPasswordLogin.setFill(Color.BLACK);
+        lblLoginPasswordMessage.setVisible(false);
+        pwdFieldPasswordLoginScene.setPromptText("password");
+    }
+
+    @FXML
+    public void clearPwdField(MouseEvent mouseEvent) {
+        pwdFieldPasswordLoginScene.clear();
     }
 
     @FXML
@@ -102,6 +137,5 @@ public class LoginController implements Initializable {
         registerWindow.initStyle(StageStyle.TRANSPARENT);
         loginWindow.close();
         registerWindow.show();
-        //loginWindow.close();
     }
 }

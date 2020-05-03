@@ -10,12 +10,23 @@ public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "task_id")
     private int id_task;
+
     private String taskName;
+
+    @ManyToOne
+    private User user;
+
+    @ManyToOne
+    private Project project;
+
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
+    private List<SubTask> subTaskList;
+
     private String taskDescription;
     private Date taskStartDate;
     private Date taskDeadline;
-    private List<SubTask> subTaskList;
     private boolean taskCompleted;
 
     public Task() {
@@ -61,14 +72,6 @@ public class Task {
         this.taskDeadline = taskDeadline;
     }
 
-    public List<SubTask> getSubTaskList() {
-        return subTaskList;
-    }
-
-    public void setSubTaskList(List<SubTask> subTaskList) {
-        this.subTaskList = subTaskList;
-    }
-
     public boolean isTaskCompleted() {
         return taskCompleted;
     }
@@ -76,6 +79,5 @@ public class Task {
     public void setTaskCompleted(boolean taskCompleted) {
         this.taskCompleted = taskCompleted;
     }
-
 
 }

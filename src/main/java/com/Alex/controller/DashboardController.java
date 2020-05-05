@@ -7,6 +7,8 @@ import com.Alex.repository.ProjectsRepository;
 import com.Alex.repository.SubTaskRepository;
 import com.Alex.repository.TasksRepository;
 import com.Alex.repository.UserRepository;
+import javafx.beans.InvalidationListener;
+import javafx.beans.binding.Binding;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -16,6 +18,7 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
+import javafx.util.Callback;
 import org.hibernate.tool.schema.internal.StandardTableExporter;
 
 import javax.persistence.EntityManager;
@@ -27,20 +30,21 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
-    UserRepository userRepository;
-    ProjectsRepository projectsRepository;
-    TasksRepository tasksRepository;
-    SubTaskRepository subTaskRepository;
-
-    public TreeTableView<Project> treeTvDashboard;
-    public TreeTableColumn<Project, String> treeTvclIssues;
+    private UserRepository userRepository;
+    private ProjectsRepository projectsRepository;
+    private TasksRepository tasksRepository;
+    private SubTaskRepository subTaskRepository;
+    private TreeTableView<Object> treeTvDashboard;
+    private TreeTableColumn<Object, String> treeTvclIssues;
+    private ObservableList<Project> projectObservableList;
+    private ObservableList<Task> taskObservableList;
+    private ObservableList<SubTask> subTaskObservableList;
+    private Project project;
+    private Task task;
+    private SubTask subTask;
     private boolean isConnectionSuccessful = false;
-    ObservableList<Project> projectObservableList;
-    ObservableList<Task> taskObservableList;
-    ObservableList<SubTask> subTaskObservableList;
-    Project project;
-    Task task;
-    SubTask subTask;
+    private TreeItem<String> treeNode;
+    private String name;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -82,30 +86,84 @@ public class DashboardController implements Initializable {
     }
 
     public void initTable() {
-        final TreeItem<Project> root = new TreeItem<>();
-        final TreeItem<Project> prj = new TreeItem<>();
-        final TreeItem<Task> tsk = new TreeItem<>();
+        TreeItem<Object> root = new TreeItem<>();
+        treeTvDashboard = new TreeTableView<>(root);
+        treeTvDashboard.setShowRoot(false);
+        treeTvclIssues = new TreeTableColumn<>();
 
-        //prj.getChildren().add(tsk);
-        //prj.setExpanded(false);
-        root.setExpanded(true);
+        treeTvclIssues.setCellValueFactory(param -> {
+            Object object = ((param.getValue().getValue()));
+            if (object instanceof Project) {
+                return new ReadOnlyStringWrapper(String.valueOf(((Project) object).getProjectName()));
+            } else if (object instanceof Task) {
+                return new ReadOnlyStringWrapper(String.valueOf(((Task) object).getTaskName()));
+            } else if (object instanceof SubTask) {
+                return new ReadOnlyStringWrapper(String.valueOf(((SubTask) object).getSubTaskName()));
+            } else {
+                return null;
+            }
+        });
 
-        getProjectObservableList().stream().forEach((project1 -> {
-            root.getChildren().add(new TreeItem<>(project1));
-            }));
+        treeTvDashboard.getColumns().add(treeTvclIssues);
+        getProjectObservableList().stream().forEach(pr -> {
+            final TreeItem<Object> prjTreeItem = new TreeItem<>(pr);
+            root.getChildren().add(prjTreeItem);
 
-        getTaskObservableList().stream().forEach((task1 -> {
-            tsk.getChildren().add(new TreeItem<>(task1));
-        }));
+            pr.getTaskList().stream().forEach(tsk -> {
+                final TreeItem<Object> tskTreeItem = new TreeItem<>(tsk);
+                prjTreeItem.getChildren().add(new TreeItem<>(tskTreeItem));
+
+                tsk.getSubTaskList().stream().forEach(sbt->{
+                    final TreeItem<Object> sbtTreeItem = new TreeItem<>(sbt);
+                    tskTreeItem.getChildren().add(new TreeItem<>(sbtTreeItem));
+                });
+            });
+        });
+    }
+
+    //            @Override
+//            public Object call(Object param) {
+//                Object object=((TreeTableColumn.CellDataFeatures<Object>)param).getValue().getValue();
+//                if(object instanceof Project){
+//                    return new ReadOnlyStringWrapper(String.valueOf(((Project)object).getProjectName()));
+//                }else if(object instanceof Task){
+//                    return new ReadOnlyStringWrapper(String.valueOf(((Task)object).getTaskName()));
+//                }else if(object instanceof SubTask){
+//                    return new ReadOnlyStringWrapper(String.valueOf(((SubTask)object).getSubTaskName()));
+//                }
+//                return null;
+//            }
+//        });
+
+//    public void initTable() {
+//        TreeItem<Project> root = new TreeItem<>();
+//        TreeItem<Project> prj = null;
+//        TreeItem<Task> tsk;
+//        root.setExpanded(true);
+//        //prj.setExpanded(true);
+//
+////        getProjectObservableList().stream().forEach((p -> {
+//////            root.getChildren().add(new TreeItem<>(p));
+//////        }));
+//
+//        for (Project p : getProjectObservableList()) {
+//            prj = new TreeItem<>(p);
+//            root.getChildren().add(prj);
+//        }
+
+
+//        getTaskObservableList().stream().forEach((task1 -> {
+//            prj.getChildren().add(new TreeItem<>(task1));
+//        }));
 
 //        getTaskObservableList().stream().forEach((task1 -> {
 //            prj.getChildren().add(new TreeItem<>(task1).getParent(root));
 //        }));
 
-        treeTvclIssues.setCellValueFactory(new TreeItemPropertyValueFactory<>("projectName"));
-        treeTvDashboard.setShowRoot(false);
-        //root.getChildren().add(tsk);
-        treeTvDashboard.setRoot(root);
+//        treeTvclIssues.setCellValueFactory(new TreeItemPropertyValueFactory<>("projectName"));
+//        treeTvDashboard.setShowRoot(true);
+//        //root.getChildren().add(tsk);
+//        treeTvDashboard.setRoot(root);
 
 //        treeTvclIssues.setCellValueFactory(new TreeItemPropertyValueFactory<>("projectName"));
 //        TreeItem<Project> root = new TreeItem<>();
@@ -124,7 +182,7 @@ public class DashboardController implements Initializable {
 //
 //    public void editTableColumn() {
 //
-    }
+    // }
 
 //    public static class Item{
 //        private Project projectItem = new Project();

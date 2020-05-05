@@ -58,4 +58,16 @@ public class TasksRepository implements CrudRepository<Task, Integer> {
             return null;
         }
     }
+
+    public Task findAllTaskAssign(Integer id) {
+        try {
+            Task tasks = (Task) entityManager.createQuery("SELECT t FROM Task t WHERE t.project_project_id = :id")
+                    .setParameter("id", id)
+                    .getResultList()
+                    .get(0);
+            return tasks;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

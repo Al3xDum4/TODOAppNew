@@ -12,13 +12,13 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "task_id")
     private int id_task;
-
     private String taskName;
 
     @ManyToOne
     private User user;
 
     @ManyToOne
+    //@Column(name = "project")
     private Project project;
 
     @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
@@ -80,4 +80,12 @@ public class Task {
         this.taskCompleted = taskCompleted;
     }
 
+    public List<SubTask> getSubTaskList() {
+        return subTaskList;
+    }
+
+    @Override
+    public String toString() {
+        return this.taskName;
+    }
 }

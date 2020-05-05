@@ -1,6 +1,7 @@
 package com.Alex.repository;
 
 import com.Alex.model.SubTask;
+import com.Alex.model.Task;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -51,6 +52,18 @@ public class SubTaskRepository implements CrudRepository<SubTask, Integer> {
             SubTask subTask = (SubTask) entityManager
                     .createQuery("SELECT u  FROM SubTasks u WHERE u.name = :name")
                     .setParameter("name", name)
+                    .getResultList()
+                    .get(0);
+            return subTask;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public SubTask findAllSubTaskAssign(Integer id) {
+        try {
+            SubTask subTask = (SubTask) entityManager.createQuery("SELECT st FROM SubTask st WHERE st.task_task_id = :id")
+                    .setParameter("id", id)
                     .getResultList()
                     .get(0);
             return subTask;

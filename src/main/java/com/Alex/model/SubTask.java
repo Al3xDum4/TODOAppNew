@@ -15,6 +15,7 @@ public class SubTask {
     private String subTaskDescription;
     private boolean subTaskCompleted;
 
+    //@Column(name="task")
     @ManyToOne
     private Task task;
 
@@ -54,5 +55,8 @@ public class SubTask {
         this.subTaskCompleted = subTaskCompleted;
     }
 
-
+    @Override
+    public String toString() {
+        return this.subTaskName;
+    }
 }

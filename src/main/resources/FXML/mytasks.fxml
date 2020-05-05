@@ -23,10 +23,11 @@
    <top>
       <AnchorPane prefHeight="125.0" prefWidth="938.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="txtFieldSearchTask" layoutX="129.0" layoutY="42.0" prefHeight="31.0" prefWidth="547.0" AnchorPane.topAnchor="20.0" />
-            <TextField fx:id="txtFieldAddSubTask" layoutX="129.0" layoutY="92.0" prefHeight="31.0" prefWidth="547.0" AnchorPane.bottomAnchor="20.0" />
-            <Button fx:id="btnSearchTask" layoutX="706.0" layoutY="20.0" mnemonicParsing="false" onAction="#searchTask" prefHeight="31.0" prefWidth="100.0" text="search task" />
-            <Button fx:id="btnAddSubTask" layoutX="706.0" layoutY="74.0" mnemonicParsing="false" onAction="#addSubTask" text="add subtask" />
+            <TextField fx:id="txtFieldSearchTask" layoutX="21.0" layoutY="20.0" prefHeight="31.0" prefWidth="547.0" AnchorPane.topAnchor="20.0" />
+            <TextField fx:id="txtFieldAddSubTask" layoutX="21.0" layoutY="74.0" prefHeight="31.0" prefWidth="547.0" AnchorPane.bottomAnchor="20.0" />
+            <Button fx:id="btnSearchTask" layoutX="641.0" layoutY="20.0" mnemonicParsing="false" onAction="#searchTask" prefHeight="31.0" prefWidth="100.0" text="search task" />
+            <Button fx:id="btnAddSubTask" layoutX="806.0" layoutY="74.0" mnemonicParsing="false" onAction="#addSubTask" text="add subtask" />
+            <Button layoutX="641.0" layoutY="74.0" mnemonicParsing="false" text="Button" />
          </children>
       </AnchorPane>
    </top>

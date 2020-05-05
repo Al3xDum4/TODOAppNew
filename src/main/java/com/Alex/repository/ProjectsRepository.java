@@ -1,6 +1,7 @@
 package com.Alex.repository;
 
 import com.Alex.model.Project;
+import com.Alex.model.Task;
 import com.Alex.model.User;
 
 import javax.persistence.EntityManager;

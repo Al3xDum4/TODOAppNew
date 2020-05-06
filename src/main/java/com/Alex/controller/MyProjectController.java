@@ -54,6 +54,8 @@ public class MyProjectController implements Initializable {
     public Project project;
     public UserRepository userRepository;
     public TreeView treeViewProject_Task;
+    public TreeTableView treeTableProjects_Task;
+    public TreeTableColumn tvClProjects;
     private boolean isConnectionSuccessful = false;
     public ObservableList<Project> tvProjectsList;
     public Task task;
@@ -149,6 +151,7 @@ public class MyProjectController implements Initializable {
         if (txtFieldAddTask.getText().length() >= 1 && project != null) {
             task = new Task();
             task.setTaskName(txtFieldAddTask.getText());
+            task.setProject(project);
             task.setTaskStartDate(Date.from(dateTaskStart.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
             task.setTaskDeadline(Date.from(dateTaskDeadline.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
             tasksRepository.save(task);

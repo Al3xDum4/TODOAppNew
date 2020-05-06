@@ -13,6 +13,7 @@ import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
@@ -34,7 +35,9 @@ public class DashboardController implements Initializable {
     private ProjectsRepository projectsRepository;
     private TasksRepository tasksRepository;
     private SubTaskRepository subTaskRepository;
+    @FXML
     private TreeTableView<Object> treeTvDashboard;
+    @FXML
     private TreeTableColumn<Object, String> treeTvclIssues;
     private ObservableList<Project> projectObservableList;
     private ObservableList<Task> taskObservableList;
@@ -104,22 +107,43 @@ public class DashboardController implements Initializable {
             }
         });
 
-        treeTvDashboard.getColumns().add(treeTvclIssues);
-        getProjectObservableList().stream().forEach(pr -> {
-            final TreeItem<Object> prjTreeItem = new TreeItem<>(pr);
-            root.getChildren().add(prjTreeItem);
+//        List<Project> prjList = buildData();
+//        prjList.stream().forEach((project) -> {
+//            final TreeItem prjTreeItem = new TreeItem(project);
+//            root.getChildren().add(prjTreeItem);
+//            project.getTaskList().stream().forEach((task) -> {
+//                prjTreeItem.getChildren().add(new TreeItem(task));
+//                task.getSubTaskList().stream().forEach(subTask1 -> {
+//                    prjTreeItem.getChildren().add(new TreeItem<>(subTask1));
+//                });
+//            });
+//        });
 
-            pr.getTaskList().stream().forEach(tsk -> {
-                final TreeItem<Object> tskTreeItem = new TreeItem<>(tsk);
-                prjTreeItem.getChildren().add(new TreeItem<>(tskTreeItem));
-
-                tsk.getSubTaskList().stream().forEach(sbt->{
-                    final TreeItem<Object> sbtTreeItem = new TreeItem<>(sbt);
-                    tskTreeItem.getChildren().add(new TreeItem<>(sbtTreeItem));
-                });
-            });
-        });
+//        getProjectObservableList().stream().forEach(pr -> {
+//            final TreeItem<Object> prjTreeItem = new TreeItem<>(pr);
+//            root.getChildren().add(prjTreeItem);
+//
+//            pr.getTaskList().stream().forEach(tsk -> {
+//                final TreeItem<Object> tskTreeItem = new TreeItem<>(tsk);
+//                prjTreeItem.getChildren().add(new TreeItem<>(tskTreeItem));
+//
+//                tsk.getSubTaskList().stream().forEach(sbt->{
+//                    final TreeItem<Object> sbtTreeItem = new TreeItem<>(sbt);
+//                    tskTreeItem.getChildren().add(new TreeItem<>(sbtTreeItem));
+//                });
+//            });
+//        });
     }
+
+//    private List<Project> buildData() {
+//        List<Project> projects = new ArrayList<>();
+//
+//        projects.add((Project) getProjectObservableList());
+//        projects.add((Project) getTaskObservableList());
+//        projects.add((Project) getSubTaskObservableList());
+//
+//        return projects;
+//    }
 
     //            @Override
 //            public Object call(Object param) {

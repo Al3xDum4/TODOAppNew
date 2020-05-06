@@ -84,13 +84,17 @@ public class RegisterController implements Initializable {
             if (pwdFieldPasswordRegisterScene.getText().isEmpty()) {
                 iconPasswordRegister.setFill(Color.RED);
                 pwdFieldPasswordRegisterScene.setPromptText("enter your password");
-                pwdFieldConfirmPasswordRegisterScene.setEditable(false);
+                //pwdFieldConfirmPasswordRegisterScene.setEditable(false);
             } else if (!pwdFieldPasswordRegisterScene.getText().matches("(?=.*[0-9])(?=.*[a-z])(?=\\S+$).{8,}$")) {
                 iconPasswordRegister.setFill(Color.RED);
                 lblRegisterPasswordMessage.setVisible(true);
                 lblRegisterPasswordMessage.setText("must contain least 8 characters of which 1 digit)");
-                pwdFieldConfirmPasswordRegisterScene.setEditable(false);
-            } else if (pwdFieldConfirmPasswordRegisterScene.getText().isEmpty()) {
+                //pwdFieldConfirmPasswordRegisterScene.setEditable(true);
+            } else if(!pwdFieldConfirmPasswordRegisterScene.getText().equals(pwdFieldPasswordRegisterScene)){
+                iconConfrimPasswordRegister.setFill(Color.RED);
+                lblRegisterPasswordMessage.setVisible(true);
+                lblRegisterPasswordMessage.setText("confirm your password");
+            }else if (pwdFieldConfirmPasswordRegisterScene.getText().isEmpty()) {
                 iconConfrimPasswordRegister.setFill(Color.RED);
                 pwdFieldConfirmPasswordRegisterScene.setPromptText("confirm your password");
                 btnRegisterRegisterScene.setDisable(true);

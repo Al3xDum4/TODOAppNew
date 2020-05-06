@@ -55,6 +55,14 @@ public class SubTask {
         this.subTaskCompleted = subTaskCompleted;
     }
 
+    public Task getTask() {
+        return task;
+    }
+
+    public void setTask(Task task) {
+        this.task = task;
+    }
+
     @Override
     public String toString() {
         return this.subTaskName;

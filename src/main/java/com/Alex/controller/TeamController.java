@@ -8,17 +8,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
+import javax.jws.soap.SOAPBinding;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class TeamController implements Initializable {
@@ -33,7 +33,9 @@ public class TeamController implements Initializable {
     public ObservableList<User> tvUsersList;
     public UserRepository userRepository;
     public Button btnSaveEditUser;
+    public Label lbl_info_team;
     private boolean isConnectionSuccessful = false;
+    private Home_PageController hp;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -80,7 +82,21 @@ public class TeamController implements Initializable {
     }
 
     public void saveEditUser(ActionEvent actionEvent) {
+//        hp = new Home_PageController();
+//        hp.lbl_infoBottom.setVisible(false);
+//        hp.lbl_infoBottom.setText("");
+        lbl_info_team.setText("");
         User user = tvTeam.getSelectionModel().getSelectedItem();
-        //user.setUserRole(fillChBoxUserRole();
+        if (user != null) {
+            user.setUserRole(chBoxUserSetRole.getValue());
+            user.setUserStatus(chBoxUserStatus.getValue());
+            userRepository.save(user);
+            chBoxUserSetRole.getSelectionModel().clearSelection();
+            chBoxUserStatus.getSelectionModel().clearSelection();
+        }else{
+            lbl_info_team.setText("choose user");
+//            hp.lbl_infoBottom.setVisible(true);
+//            hp.lbl_infoBottom.setText("choose a user");
+        }
     }
 }

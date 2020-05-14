@@ -1,9 +1,11 @@
 package com.Alex.repository;
 
 import com.Alex.model.User;
+import com.Alex.model.UserRole;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

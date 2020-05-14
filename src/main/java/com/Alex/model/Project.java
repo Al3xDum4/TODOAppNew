@@ -16,13 +16,14 @@ public class Project {
     @Column(name = "project_id")
     private int project_id;
     @Column(name = "name")
-    private String projectName;
+    private String name;
     @Column(name = "start_date")
-    private Date projectStartDate;
+    private Date startDate;
     @Column(name = "deadline")
-    private Date projectDeadline;
+    private Date deadline;
     private String projectDescription;
     private boolean projectCompleted;
+    private boolean choose;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private List<Task> taskList;
@@ -41,28 +42,28 @@ public class Project {
         this.project_id = id_project;
     }
 
-    public String getProjectName() {
-        return projectName;
+    public String getName() {
+        return name;
     }
 
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Date getProjectStartDate() {
-        return projectStartDate;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setProjectStartDate(Date projectStartDate) {
-        this.projectStartDate = projectStartDate;
+    public void setStartDate(Date projectStartDate) {
+        this.startDate = projectStartDate;
     }
 
-    public Date getProjectDeadline() {
-        return projectDeadline;
+    public Date getDeadline() {
+        return deadline;
     }
 
-    public void setProjectDeadline(Date projectDeadline) {
-        this.projectDeadline = projectDeadline;
+    public void setDeadline(Date projectDeadline) {
+        this.deadline = projectDeadline;
     }
 
     public String getProjectDescription() {
@@ -89,8 +90,16 @@ public class Project {
         this.taskList = taskList;
     }
 
+    public boolean isChoose() {
+        return choose;
+    }
+
+    public void setChoose(boolean choose) {
+        this.choose = choose;
+    }
+
     @Override
     public String toString() {
-        return this.projectName;
+        return this.name;
     }
 }

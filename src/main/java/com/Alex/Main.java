@@ -27,7 +27,10 @@ import java.io.InputStream;
 //todo: Add subTasks
 //todo: thread for connection
 //todo: migrate to spring data
-//
+//todo: progressBar in dashboard for task (progressBar = sum(subTask)
+//todo: x button from main stage active always
+//todo: search task field, iterate following table and mark the row
+//todo: search project field, iterate following table and mark the row
 
 public class Main extends Application {
 

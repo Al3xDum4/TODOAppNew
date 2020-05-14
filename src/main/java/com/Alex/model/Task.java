@@ -1,5 +1,7 @@
 package com.Alex.model;
 
+import javafx.scene.control.cell.CheckBoxTreeTableCell;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -12,7 +14,8 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "task_id")
     private int id_task;
-    private String taskName;
+    @Column(name = "name")
+    private String name;
 
     @ManyToOne
     private User user;
@@ -25,8 +28,9 @@ public class Task {
     private List<SubTask> subTaskList;
 
     private String taskDescription;
-    private Date taskStartDate;
-    private Date taskDeadline;
+    private Date startDate;
+    private Date deadline;
+    private boolean choose;
     private boolean taskCompleted;
 
     public Task() {
@@ -40,12 +44,12 @@ public class Task {
         this.id_task = id_task;
     }
 
-    public String getTaskName() {
-        return taskName;
+    public String getName() {
+        return name;
     }
 
-    public void setTaskName(String taskName) {
-        this.taskName = taskName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getTaskDescription() {
@@ -56,20 +60,20 @@ public class Task {
         this.taskDescription = taskDescription;
     }
 
-    public Date getTaskStartDate() {
-        return taskStartDate;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setTaskStartDate(Date taskStartDate) {
-        this.taskStartDate = taskStartDate;
+    public void setStartDate(Date taskStartDate) {
+        this.startDate = taskStartDate;
     }
 
-    public Date getTaskDeadline() {
-        return taskDeadline;
+    public Date getDeadline() {
+        return deadline;
     }
 
-    public void setTaskDeadline(Date taskDeadline) {
-        this.taskDeadline = taskDeadline;
+    public void setDeadline(Date taskDeadline) {
+        this.deadline = taskDeadline;
     }
 
     public boolean isTaskCompleted() {
@@ -92,8 +96,24 @@ public class Task {
         this.project = project;
     }
 
+    public boolean isChoose() {
+        return choose;
+    }
+
+    public void setChoose(boolean choose) {
+        this.choose = choose;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
-        return this.taskName;
+        return this.name;
     }
 }

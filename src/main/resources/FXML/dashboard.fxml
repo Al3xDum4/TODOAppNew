@@ -4,13 +4,16 @@
 <?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.BorderPane?>
 
-
 <BorderPane prefHeight="596.0" prefWidth="938.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.Alex.controller.DashboardController">
    <center>
       <TreeTableView fx:id="treeTvDashboard" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
-          <TreeTableColumn fx:id="treeTvclIssues" prefWidth="679.0" text="Issues" />
-          <TreeTableColumn prefWidth="258.0" text="C2" />
+          <TreeTableColumn fx:id="treeTvclIssues" prefWidth="293.0" text="Issues" />
+          <TreeTableColumn fx:id="treeTvclChoose" prefWidth="114.0" text="Choose" />
+            <TreeTableColumn fx:id="treeTvclAssign" prefWidth="138.0" text="Assign" />
+            <TreeTableColumn fx:id="treeTvclProgress" prefWidth="139.0" text="Progress" />
+            <TreeTableColumn fx:id="treeTvclStart" prefWidth="117.0" text="Start" />
+            <TreeTableColumn fx:id="treeTvclDeadline" prefWidth="136.0" text="Deadline" />
         </columns>
       </TreeTableView>
    </center>

@@ -90,7 +90,7 @@ public class RegisterController implements Initializable {
                 lblRegisterPasswordMessage.setVisible(true);
                 lblRegisterPasswordMessage.setText("must contain least 8 characters of which 1 digit)");
                 //pwdFieldConfirmPasswordRegisterScene.setEditable(true);
-            } else if(!pwdFieldConfirmPasswordRegisterScene.getText().equals(pwdFieldPasswordRegisterScene)){
+            } else if(!pwdFieldConfirmPasswordRegisterScene.getText().equals(pwdFieldPasswordRegisterScene.getText())){
                 iconConfrimPasswordRegister.setFill(Color.RED);
                 lblRegisterPasswordMessage.setVisible(true);
                 lblRegisterPasswordMessage.setText("confirm your password");

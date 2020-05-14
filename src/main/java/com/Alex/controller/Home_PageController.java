@@ -1,9 +1,6 @@
 package com.Alex.controller;
 
-import com.Alex.model.Project;
 import com.Alex.model.User;
-import com.Alex.model.UserRole;
-import com.Alex.model.UserStatus;
 import com.Alex.repository.UserRepository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,13 +11,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -28,23 +23,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-//DONE: Add scene for different operations
-//DONE: Make all the tabs hidden. Login window opens when you click an option in the menu
-//DONE: After login success show other tabs. Clear text fields. Show message.
-//DONE: After clicking register, empty text boxes, show message user registration.
-//DONE: Create other entities. Task, Subtask + repository gor each.
-//DONE: create tab for registering tasks
-//TODO: create control for registering subtask
-//TODO: create tab for assign task. Two comboboxes, one for tasks, one for all users.
-//DONE: add button to show password
-//DONE: check if username is already exists
-//DONE: check if password contain certain characters
-//TODO: save encrypted(encoded) password in DB. Be careful how to read them unencrypted
-//TODO: implement login action
-//TODO: user role (administrator, coordinator, developer, tester, etc...)
-//TODO: to add or remove project, only administrator/coordinator
-
 
 public class Home_PageController implements Initializable {
     @FXML
@@ -78,6 +56,8 @@ public class Home_PageController implements Initializable {
             System.out.println("Connection is not allowed");
             isConnectionSuccessful = false;
         }
+
+        dashboardOnStart();
     }
 
     private void persistenceConnection() {
@@ -156,6 +136,12 @@ public class Home_PageController implements Initializable {
     public void displayChatScreen(ActionEvent actionEvent) {
         FxmlLoader fxmlLoader = new FxmlLoader();
         Pane pane = fxmlLoader.getPane("chat");
+        borderPane.setCenter(pane);
+    }
+
+    public void dashboardOnStart(){
+        FxmlLoader fxmlLoader = new FxmlLoader();
+        Pane pane = fxmlLoader.getPane("dashboard");
         borderPane.setCenter(pane);
     }
 }

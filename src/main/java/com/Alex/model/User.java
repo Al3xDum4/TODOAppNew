@@ -78,6 +78,14 @@ public class User {
         this.userRole = userRole;
     }
 
+    public UserStatus getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(UserStatus userStatus) {
+        this.userStatus = userStatus;
+    }
+
     @Override
     public String toString() {
         return this.username;

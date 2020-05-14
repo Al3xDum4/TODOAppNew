@@ -11,7 +11,7 @@ public class SubTask {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "subTask_id")
     private int id_subTask;
-    private String subTaskName;
+    private String name;
     private String subTaskDescription;
     private boolean subTaskCompleted;
 
@@ -31,12 +31,12 @@ public class SubTask {
         this.id_subTask = id_subTask;
     }
 
-    public String getSubTaskName() {
-        return subTaskName;
+    public String getName() {
+        return name;
     }
 
-    public void setSubTaskName(String subTaskName) {
-        this.subTaskName = subTaskName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getSubTaskDescription() {
@@ -65,6 +65,6 @@ public class SubTask {
 
     @Override
     public String toString() {
-        return this.subTaskName;
+        return this.name;
     }
 }

@@ -13,37 +13,47 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.net.URL;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class TaskController implements Initializable {
-    public TableView<Task> tvTasks;
-    public TableColumn<Task, String> clTaskDescription;
-    public TableColumn<Task, String> clStartDate;
-    public TableColumn<Task, String> clDeadline;
-    public TableColumn<Task, String> clProgress;
-    public TableColumn<Task, String> clProject;
+
     public TextField txtFieldSearchTask;
     public TextField txtFieldAddSubTask;
     public Button btnSearchTask;
     public Button btnAddSubTask;
     public ComboBox<Task> cmbChooseTask;
+
+    public TreeTableView<Task> treeTableTask_Subtask;
+    public TreeTableColumn<Task, String> treeClIssues;
+    public TreeTableColumn<Task, String> treeClStart;
+    public TreeTableColumn<Task, String> treeClDeadline;
+    public TreeTableColumn<Task, String> treeClProgress;
+    public TreeTableColumn<SubTask, String> treeClDone;
+
     private Boolean isConnectionSuccessful = false;
-    private User user;
-    private UserRepository userRepository;
-    private TasksRepository tasksRepository;
-    private Project project;
-    private ProjectsRepository projectsRepository;
+
     public ObservableList<Task> taskList;
+    public ObservableList<SubTask> subTaskList;
+
+    private User user;
+    private Project project;
     private Task task;
-    private SubTaskRepository subTaskRepository;
     private SubTask subTask;
+
+    private UserRepository userRepository;
+    private ProjectsRepository projectsRepository;
+    private TasksRepository tasksRepository;
+    private SubTaskRepository subTaskRepository;
 
 
     @Override
@@ -54,6 +64,9 @@ public class TaskController implements Initializable {
             System.out.println("Connection is not allowed");
             isConnectionSuccessful = false;
         }
+        initColumnIssues(treeTableTask_Subtask);
+        initColumns();
+
     }
 
     private void persistenceConnection() {
@@ -73,10 +86,43 @@ public class TaskController implements Initializable {
     public ObservableList<Task> getTaskList() {
         task = new Task();
         taskList = FXCollections.observableArrayList(tasksRepository.findAll());
-        if (taskList == null) {
-            return FXCollections.observableArrayList();
-        }
         return taskList;
+    }
+
+    public ObservableList<SubTask> getSubTaskList() {
+        subTask = new SubTask();
+        subTaskList = FXCollections.observableArrayList(subTaskRepository.findAll());
+        return subTaskList;
+    }
+
+    public void initColumns() {
+        treeClIssues.setCellValueFactory(new TreeItemPropertyValueFactory<>("name"));
+        treeClStart.setCellValueFactory(new TreeItemPropertyValueFactory<>("startDate"));
+        treeClDeadline.setCellValueFactory(new TreeItemPropertyValueFactory<>("deadline"));
+    }
+
+    public void initColumnIssues(TreeTableView<Task> tree) {
+        List<Object> objects = new ArrayList<>();
+        objects.addAll(getTaskList());
+        objects.addAll(getSubTaskList());
+        TreeItem<Task> root = new TreeItem<>(new Task());
+
+        List<TreeItem<Task>> tskItem = new ArrayList<>();
+        for (Object o : objects) {
+            if (o instanceof Task) {
+                TreeItem taskItem = new TreeItem(o);
+                for (SubTask subTask : ((Task) o).getSubTaskList()) {
+                    TreeItem taskSubTask = new TreeItem(subTask);
+                    taskItem.getChildren().add(taskSubTask);
+                }
+                tskItem.add(taskItem);
+            }
+        }
+
+        root.getChildren().addAll(tskItem);
+        tree.setRoot(root);
+        tree.setShowRoot(false);
+        tree.getStylesheets().add("CSS/dashboardTreeTable.css");
     }
 
     public void loadComboBoxTask() {
@@ -89,10 +135,11 @@ public class TaskController implements Initializable {
         Task task = cmbChooseTask.getValue();
         if (txtFieldAddSubTask.getText().length() >= 1 && task != null) {
             subTask = new SubTask();
-            subTask.setSubTaskName(txtFieldAddSubTask.getText());
+            subTask.setName(txtFieldAddSubTask.getText());
             subTask.setTask(task);
             subTaskRepository.save(subTask);
             txtFieldAddSubTask.clear();
+            cmbChooseTask.getEditor().clear();
         } else if (project == null) {
             cmbChooseTask.setStyle("-fx-border-color: red");
         } else {

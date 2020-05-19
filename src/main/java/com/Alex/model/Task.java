@@ -1,6 +1,6 @@
 package com.Alex.model;
 
-import javafx.scene.control.cell.CheckBoxTreeTableCell;
+import javafx.beans.property.BooleanProperty;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -31,6 +31,7 @@ public class Task {
     private Date startDate;
     private Date deadline;
     private boolean choose;
+    private boolean inProgress;
     private boolean taskCompleted;
 
     public Task() {
@@ -110,6 +111,18 @@ public class Task {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public void setSubTaskList(List<SubTask> subTaskList) {
+        this.subTaskList = subTaskList;
+    }
+
+    public boolean isInProgress() {
+        return inProgress;
+    }
+
+    public void setInProgress(boolean inProgress) {
+        this.inProgress = inProgress;
     }
 
     @Override

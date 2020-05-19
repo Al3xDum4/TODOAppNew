@@ -14,8 +14,10 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -41,6 +43,7 @@ public class Home_PageController implements Initializable {
     public MenuItem mnuItemLogin;
     public Label lbl_infoBottom;
     public UserRepository userRepository;
+    public Text txt_createAccount;
     private boolean isConnectionSuccessful = false;
     public User user;
     Stage loginWindow = new Stage();
@@ -58,6 +61,7 @@ public class Home_PageController implements Initializable {
         }
 
         dashboardOnStart();
+        inactivateButton();
     }
 
     private void persistenceConnection() {
@@ -139,9 +143,15 @@ public class Home_PageController implements Initializable {
         borderPane.setCenter(pane);
     }
 
-    public void dashboardOnStart(){
+    public void dashboardOnStart() {
         FxmlLoader fxmlLoader = new FxmlLoader();
         Pane pane = fxmlLoader.getPane("dashboard");
         borderPane.setCenter(pane);
+    }
+
+    public void inactivateButton() {
+        btn_calendar.setDisable(true);
+        btn_chat.setDisable(true);
+        txt_createAccount.setDisable(true);
     }
 }

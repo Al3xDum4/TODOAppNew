@@ -26,13 +26,15 @@ import javafx.util.Callback;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
-    public TreeTableColumn<Object, Boolean> treeTvclChoose;
+    public TreeTableColumn<Project, Boolean> treeTvclChoose;
     public TreeTableColumn treeTvclAssign;
     public TreeTableColumn treeTvclProgress;
     public TreeTableColumn<Object, String> treeTvclStart;
@@ -64,9 +66,10 @@ public class DashboardController implements Initializable {
             System.out.println("Connection is not allowed");
             isConnectionSuccessful = false;
         }
-        initColumnIssues(treeTvDashboard);
+        treeTvDashboard.setEditable(true);
+        setupColumnIssues(treeTvDashboard);
         initColumns();
-//        chooseTask();
+        //chooseTask();
     }
 
     private void persistenceConnection() {
@@ -97,7 +100,7 @@ public class DashboardController implements Initializable {
         return subTaskObservableList;
     }
 
-    public void initColumnIssues(TreeTableView<Project> tree) {
+    public void setupColumnIssues(TreeTableView<Project> tree) {
         List<Object> objects = new ArrayList<>();
         objects.addAll(getProjectObservableList());
         objects.addAll(getTaskObservableList());
@@ -120,22 +123,47 @@ public class DashboardController implements Initializable {
         tree.getStylesheets().add("CSS/dashboardTreeTable.css");
     }
 
-    public void chooseTask() {
-        
-    }
+//    public void chooseTask() {
+//        treeTvclChoose.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Project, Boolean>, //
+//                ObservableValue<Boolean>>() {
+//
+//            @Override
+//            public ObservableValue<Boolean> call(TreeTableColumn.CellDataFeatures<Project, Boolean> param) {
+//                TreeItem<Project> treeItem = param.getValue();
+//                Project prj = treeItem.getValue();
+//
+//                    SimpleBooleanProperty booleanProp = new SimpleBooleanProperty(prj.isChoose());
+//                    booleanProp.addListener((observable, oldValue, newValue) -> prj.setChoose(newValue));
+//                    return booleanProp;
+//                }
+//        });
+//    }
 
     public void initColumns() {
         treeTvclIssues.setCellValueFactory(new TreeItemPropertyValueFactory<>("name"));
         treeTvclStart.setCellValueFactory(new TreeItemPropertyValueFactory<>("startDate"));
         treeTvclDeadline.setCellValueFactory(new TreeItemPropertyValueFactory<>("deadline"));
 
-
-        treeTvclChoose.setCellFactory(new Callback<TreeTableColumn<Object, Boolean>, TreeTableCell<Object, Boolean>>() {
+        treeTvclChoose.setCellFactory(new Callback<TreeTableColumn<Project, Boolean>, TreeTableCell<Project, Boolean>>() {
             @Override
-            public TreeTableCell<Object, Boolean> call(TreeTableColumn<Object, Boolean> p) {
-                cell = new CheckBoxTreeTableCell<Object, Boolean>();
-                cell.setAlignment(Pos.CENTER);
-                return cell;
+            public TreeTableCell<Project, Boolean> call(TreeTableColumn<Project, Boolean> objectBooleanTreeTableColumn) {
+                return new CheckBoxTreeTableCell<Project, Boolean>() {
+                    @Override
+                    public void updateItem(Boolean value, boolean empty) {
+                        super.updateItem(value, empty);
+
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            TreeItem item = treeTvDashboard.getTreeItem(getIndex());
+                            if (item == null || !(item.getValue() instanceof Task)) {
+                                setGraphic(null);
+                            } else {
+                                setAlignment(Pos.CENTER);
+                            }
+                        }
+                    }
+                };
             }
         });
     }

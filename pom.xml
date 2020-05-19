@@ -56,6 +56,11 @@
             <artifactId>fontawesomefx</artifactId>
             <version>8.9</version>
         </dependency>
+        <dependency>
+            <groupId>org.drombler.commons</groupId>
+            <artifactId>drombler-commons-fx-time</artifactId>
+            <version>0.2</version>
+        </dependency>
 
     </dependencies>
 

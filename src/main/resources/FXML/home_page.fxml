@@ -134,7 +134,7 @@
                   <Insets top="10.0" />
                </VBox.margin>
                <children>
-                  <Button fx:id="btn_calendar" mnemonicParsing="false" onAction="#displayCalendarScreen" prefHeight="31.0" prefWidth="218.0" style="-fx-background-color: transparent;" text="Calendar" />
+                  <Button fx:id="btn_projects" mnemonicParsing="false" onAction="#displayProjectsScreen" prefHeight="31.0" prefWidth="218.0" style="-fx-background-color: transparent;" text="Projects" />
                </children>
             </HBox>
             <HBox alignment="CENTER">
@@ -142,7 +142,7 @@
                   <Insets top="10.0" />
                </VBox.margin>
                <children>
-                  <Button fx:id="btn_projects" mnemonicParsing="false" onAction="#displayProjectsScreen" prefHeight="31.0" prefWidth="218.0" style="-fx-background-color: transparent;" text="Projects" />
+                  <Button fx:id="btn_calendar" mnemonicParsing="false" onAction="#displayCalendarScreen" prefHeight="31.0" prefWidth="218.0" style="-fx-background-color: transparent;" text="Calendar" />
                </children>
             </HBox>
             <HBox alignment="CENTER">
@@ -158,7 +158,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Create account" underline="true">
+                  <Text fx:id="txt_createAccount" strokeType="OUTSIDE" strokeWidth="0.0" text="Create account" underline="true">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>

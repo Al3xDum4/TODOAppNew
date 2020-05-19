@@ -11,6 +11,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="io.github.typhon0:AnimateFX:1.2.1" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:8.0.19" level="project" />
     <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java:3.6.1" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-core:5.4.12.Final" level="project" />
@@ -35,6 +36,18 @@
     <orderEntry type="library" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.2.Final" level="project" />
     <orderEntry type="library" name="Maven: de.jensd:fontawesomefx:8.9" level="project" />
     <orderEntry type="library" name="Maven: org.controlsfx:controlsfx:8.40.11" level="project" />
-    <orderEntry type="library" name="io.github.typhon0:AnimateFX:1.2.1" level="project" />
+    <orderEntry type="library" name="Maven: org.drombler.commons:drombler-commons-fx-time:0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.drombler.commons:drombler-commons-fx-core:0.2" level="project" />
+    <orderEntry type="module-library">
+      <library name="Maven: javafx:jfxrt:2.2.0">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/javafx/jfxrt/2.2.0/jfxrt-2.2.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="Maven: org.softsmithy.lib:softsmithy-lib-core:0.4" level="project" />
+    <orderEntry type="library" name="Maven: org.softsmithy.lib:softsmithy-lib-time:0.4" level="project" />
   </component>
 </module>
